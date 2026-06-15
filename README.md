@@ -61,11 +61,22 @@ python3 -m http.server 8000
 - **Fonts** are loaded from Google Fonts in `index.html` (Space Grotesk + Inter).
 - **Product images** are elegant neutral placeholder blocks (`.ph` elements). Swap any
   `.ph` block for an `<img>` when real photography is ready.
-- **Prices, copy, and colours** are plain text in `index.html`.
+- **Prices, copy, and colours** are plain text in `index.html`. Each product's
+  price lives in exactly one place — the visible `.card__price` (and the set's
+  `.set-price__now`); the bag reads those directly, so there's nothing to keep in
+  sync. The product `name` and image still carry `data-name`/`data-img` on the
+  card as fallbacks. If you change a price, also update the matching `price` in
+  the JSON-LD `Product` block in `index.html`'s `<head>` so search engines stay
+  accurate.
 
 ## Notes
 
 - The bag/checkout is a front-end preview only — no payments are processed.
-- The waitlist and newsletter forms show a success message but don't yet submit
-  anywhere. Wire them to your email provider (e.g. Mailchimp, Klaviyo, a form service)
-  when you're ready.
+- The waitlist and newsletter forms are wired to POST through a single
+  `FORM_ENDPOINT` constant at the top of the email-signup section in `js/main.js`.
+  It ships empty, so the forms validate and show the success message but don't
+  send anywhere yet. To go live, set `FORM_ENDPOINT` to your form service URL
+  (e.g. a Formspree endpoint `https://formspree.io/f/xxxxxxxx`, or a
+  Mailchimp/Klaviyo proxy). Both forms submit their fields as `FormData`; the
+  email inputs already carry `name="email"`. A failed request surfaces an inline
+  error message instead of the success note.

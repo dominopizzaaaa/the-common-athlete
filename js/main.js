@@ -335,11 +335,26 @@
         consent.focus();
         return;
       }
-      waitlistForm.querySelectorAll("input, select").forEach(function (el) {
-        if (el.type === "checkbox") el.checked = false;
-        else el.value = "";
+      var submitBtn = waitlistForm.querySelector('button[type="submit"]');
+      withPending(submitBtn, function () {
+        return submitSignup(waitlistForm).then(function (ok) {
+          if (!ok) {
+            if (waitlistSuccess) {
+              waitlistSuccess.hidden = false;
+              waitlistSuccess.textContent = "Something went wrong — please try again or WhatsApp us.";
+            }
+            return;
+          }
+          waitlistForm.querySelectorAll("input, select").forEach(function (el) {
+            if (el.type === "checkbox") el.checked = false;
+            else el.value = "";
+          });
+          if (waitlistSuccess) {
+            waitlistSuccess.textContent = "You're in — we'll let you know when new pieces drop.";
+            waitlistSuccess.hidden = false;
+          }
+        });
       });
-      if (waitlistSuccess) waitlistSuccess.hidden = false;
     });
   }
 
@@ -351,8 +366,20 @@
       e.preventDefault();
       var input = footerForm.querySelector("input");
       if (!input.value || !input.checkValidity()) { input.focus(); return; }
-      input.value = "";
-      if (footerMsg) footerMsg.hidden = false;
+      var submitBtn = footerForm.querySelector('button[type="submit"]');
+      withPending(submitBtn, function () {
+        return submitSignup(footerForm).then(function (ok) {
+          if (!footerMsg) return;
+          if (!ok) {
+            footerMsg.textContent = "Something went wrong — please try again.";
+            footerMsg.hidden = false;
+            return;
+          }
+          input.value = "";
+          footerMsg.textContent = "Thanks — you're on the list.";
+          footerMsg.hidden = false;
+        });
+      });
     });
   }
 
