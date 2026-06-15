@@ -79,7 +79,7 @@
     drawerBody.innerHTML = bag.map(function (item, idx) {
       return (
         '<div class="bag-item">' +
-          '<div class="bag-item__thumb ph ph--tone-oat"></div>' +
+          '<div class="bag-item__thumb ph"><img src="' + item.img + '" alt="" /></div>' +
           '<div class="bag-item__info">' +
             '<div class="bag-item__name">' + item.name + '</div>' +
             '<div class="bag-item__price">' + money(item.price) + '</div>' +
@@ -95,10 +95,10 @@
     }).join("");
   }
 
-  function addToBag(name, price) {
+  function addToBag(name, price, img) {
     var existing = bag.find(function (i) { return i.name === name; });
     if (existing) { existing.qty += 1; }
-    else { bag.push({ name: name, price: price, qty: 1 }); }
+    else { bag.push({ name: name, price: price, img: img, qty: 1 }); }
     renderBag();
     openDrawer();
   }
@@ -108,7 +108,7 @@
     btn.addEventListener("click", function () {
       var card = btn.closest(".card");
       if (!card) return;
-      addToBag(card.dataset.name, parseFloat(card.dataset.price));
+      addToBag(card.dataset.name, parseFloat(card.dataset.price), card.dataset.img);
     });
   });
 
@@ -181,7 +181,8 @@
 
   /* ---------- Scroll reveal ---------- */
   var revealEls = document.querySelectorAll(
-    ".section__head, .card, .tile, .feat, .highlight, .about, .waitlist, .promise__item, .community__item"
+    ".section__head, .card, .tile, .feat, .highlight, .about, .waitlist, .promise__item, " +
+    ".community__item, .look, .sizing, .faq__item"
   );
   revealEls.forEach(function (el) { el.classList.add("reveal"); });
 

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 640" role="img" aria-labelledby="t">
+  <title id="t">Built for sweat. Designed for every day. — The Common Athlete</title>
+  <defs>
+    <linearGradient id="left" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5B4636"/><stop offset="1" stop-color="#3f2f23"/>
+    </linearGradient>
+    <linearGradient id="right" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6dccb"/><stop offset="1" stop-color="#cdbfa6"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.75" cy="0.1" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.25"/><stop offset="0.6" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="640" fill="url(#left)"/>
+  <rect x="860" width="740" height="640" fill="url(#right)"/>
+  <rect x="860" width="740" height="640" fill="url(#sheen)"/>
+
+  <!-- text -->
+  <text x="90" y="270" font-family="Helvetica, Arial, sans-serif" font-size="60" font-weight="700" letter-spacing="-1" fill="#f6f2ea">Built for sweat.</text>
+  <text x="90" y="340" font-family="Helvetica, Arial, sans-serif" font-size="60" font-weight="700" letter-spacing="-1" fill="#d8cbb8">Designed for every day.</text>
+  <text x="92" y="200" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="5" fill="#cdbfa6">THE FIRST DROP</text>
+  <text x="92" y="408" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="400" letter-spacing="1" fill="#cbb9a4">Activewear for movement, comfort, and real life.</text>
+
+  <!-- figure in right panel -->
+  <g transform="translate(1110 28) scale(0.58)">
+    <path d="M 354 150 C 354 96 446 96 446 150 C 450 188 444 250 428 272 L 420 250 C 426 200 418 172 400 170 C 382 172 374 200 380 250 L 372 272 C 356 250 350 188 354 150 Z" fill="#5B4636"/>
+    <circle cx="400" cy="160" r="44" fill="#5B4636"/>
+    <rect x="384" y="198" width="32" height="26" fill="#5B4636"/>
+    <path d="M 350 234 C 364 218 436 218 450 234 L 470 258 C 478 322 472 460 462 560 L 338 560 C 328 460 322 322 330 258 Z" fill="#5B4636"/>
+    <path d="M 378 556 L 374 904" stroke="#5B4636" stroke-width="46" stroke-linecap="round" fill="none"/>
+    <path d="M 422 556 L 426 904" stroke="#5B4636" stroke-width="46" stroke-linecap="round" fill="none"/>
+    <path d="M 356 248 C 326 304 312 376 308 452" stroke="#5B4636" stroke-width="30" stroke-linecap="round" fill="none"/>
+    <path d="M 444 248 C 474 304 488 376 492 452" stroke="#5B4636" stroke-width="30" stroke-linecap="round" fill="none"/>
+    <path d="M 330 462 L 470 462 L 468 556 L 462 636 L 416 636 L 408 540 L 400 552 L 392 540 L 384 636 L 338 636 L 332 556 Z" fill="#f6f2ea"/>
+    <path d="M 340 252 L 364 242 C 384 256 416 256 436 242 L 460 252 C 466 300 466 360 460 404 L 340 404 C 334 360 334 300 340 252 Z" fill="#f6f2ea"/>
+  </g>
+</svg>

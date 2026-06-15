@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-labelledby="t">
+  <title id="t">How to measure — bust, waist, hip</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3efe7"/><stop offset="1" stop-color="#e7ddcd"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#bg)"/>
+
+  <!-- figure outline -->
+  <g transform="translate(100 -40) scale(0.5)">
+    <circle cx="400" cy="160" r="44" fill="none" stroke="#5B4636" stroke-width="4"/>
+    <path d="M 350 234 C 364 218 436 218 450 234 L 470 258 C 478 322 472 460 462 560 L 338 560 C 328 460 322 322 330 258 Z" fill="none" stroke="#5B4636" stroke-width="4"/>
+    <path d="M 356 248 C 326 304 312 376 308 452" stroke="#5B4636" stroke-width="4" fill="none"/>
+    <path d="M 444 248 C 474 304 488 376 492 452" stroke="#5B4636" stroke-width="4" fill="none"/>
+    <path d="M 378 556 L 374 800" stroke="#5B4636" stroke-width="4" fill="none"/>
+    <path d="M 422 556 L 426 800" stroke="#5B4636" stroke-width="4" fill="none"/>
+  </g>
+
+  <!-- measurement lines -->
+  <g stroke="#b0392b" stroke-width="2" stroke-dasharray="6 5">
+    <line x1="252" y1="200" x2="372" y2="200"/>
+    <line x1="256" y1="320" x2="364" y2="320"/>
+    <line x1="250" y1="420" x2="372" y2="420"/>
+  </g>
+  <g fill="#b0392b" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="2">
+    <text x="396" y="206">BUST</text>
+    <text x="396" y="326">WAIST</text>
+    <text x="396" y="426">HIP</text>
+  </g>
+  <g fill="#6E6E6E" font-family="Helvetica, Arial, sans-serif" font-size="13">
+    <text x="396" y="226">Around the fullest part</text>
+    <text x="396" y="346">Around the narrowest part</text>
+    <text x="396" y="446">Around the fullest part</text>
+  </g>
+
+  <text x="60" y="730" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="600" letter-spacing="2" fill="#5B4636">MEASURE WITH A SOFT TAPE, KEEP IT LEVEL.</text>
+</svg>

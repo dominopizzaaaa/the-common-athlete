@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="t">
+  <title id="t">Lookbook — the cover tee</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6b5340"/><stop offset="1" stop-color="#463528"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.7" cy="0.1" r="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/><stop offset="0.65" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#sheen)"/>
+  <path d="M 354 150 C 354 96 446 96 446 150 C 450 188 444 250 428 272 L 420 250 C 426 200 418 172 400 170 C 382 172 374 200 380 250 L 372 272 C 356 250 350 188 354 150 Z" fill="#2f241a"/>
+  <circle cx="400" cy="160" r="44" fill="#2f241a"/>
+  <rect x="384" y="198" width="32" height="26" fill="#2f241a"/>
+  <!-- legs -->
+  <path d="M 378 556 L 374 904" stroke="#2f241a" stroke-width="46" stroke-linecap="round" fill="none"/>
+  <path d="M 422 556 L 426 904" stroke="#2f241a" stroke-width="46" stroke-linecap="round" fill="none"/>
+  <!-- shorts (partly under tee) -->
+  <path d="M 332 470 L 468 470 L 466 556 L 460 624 L 416 624 L 408 540 L 400 552 L 392 540 L 384 624 L 340 624 L 334 556 Z" fill="#d8cbb8"/>
+  <!-- oversized cover tee -->
+  <path d="M 330 244 C 360 234 440 234 470 244 L 512 280 C 522 290 520 304 508 310 L 478 296 L 484 492 L 316 492 L 322 296 L 292 310 C 280 304 278 290 288 280 L 330 244 Z" fill="#efe7d9"/>
+  <path d="M 350 248 C 372 262 428 262 450 248" fill="none" stroke="#ddd0bc" stroke-width="3"/>
+  <text x="400" y="372" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="2" fill="#5B4636">THE COMMON ATHLETE</text>
+  <text x="56" y="950" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="3" fill="#f6f2ea" opacity="0.9">THE COVER TEE</text>
+</svg>

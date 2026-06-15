@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="t">
+  <title id="t">Everyday Crew Socks — The Common Athlete</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfaf7"/>
+      <stop offset="1" stop-color="#ece8df"/>
+    </linearGradient>
+    <linearGradient id="cloth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ece1cf"/>
+      <stop offset="1" stop-color="#dccdb4"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.78" cy="0.12" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="0.6" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#sheen)"/>
+
+  <!-- a single crew sock, reused -->
+  <defs>
+    <g id="sock">
+      <path d="M 0 0 L 98 0 L 98 180 C 98 206 116 226 148 230 L 220 236
+               C 236 238 242 250 239 264 L 234 280 C 232 290 224 296 212 294
+               L 110 282 C 50 276 12 244 6 192 L 0 40 Z"
+            fill="url(#cloth)" stroke="#cdbb9c" stroke-width="2"/>
+      <!-- ribbed cuff -->
+      <rect x="0" y="0" width="98" height="44" fill="#e3d4ba"/>
+      <line x1="0" y1="44" x2="98" y2="44" stroke="#cdbb9c" stroke-width="2"/>
+      <!-- athletic stripes -->
+      <rect x="6" y="56" width="86" height="8" fill="#5B4636"/>
+      <rect x="6" y="72" width="86" height="8" fill="#5B4636"/>
+    </g>
+  </defs>
+
+  <use href="#sock" transform="translate(150 320) scale(1.05)"/>
+  <use href="#sock" transform="translate(330 380) rotate(8) scale(1.05)"/>
+
+  <!-- wordmark -->
+  <text x="400" y="700" text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+        font-size="20" font-weight="700" letter-spacing="3.5" fill="#5B4636">THE COMMON ATHLETE</text>
+
+  <text x="56" y="80" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700"
+        letter-spacing="3" fill="#5B4636" opacity="0.8">04</text>
+  <text x="56" y="950" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600"
+        letter-spacing="2.5" fill="#5B4636" opacity="0.8">EVERYDAY CREW SOCKS</text>
+</svg>
