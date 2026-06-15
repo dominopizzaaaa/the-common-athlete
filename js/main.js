@@ -69,7 +69,6 @@
   var drawerBody = document.getElementById("drawerBody");
   var drawerTotal = document.getElementById("drawerTotal");
   var checkoutBtn = document.getElementById("checkoutBtn");
-  var drawerWaitlistCta = document.getElementById("drawerWaitlistCta");
 
   function money(n) { return "S$" + n.toFixed(2); }
 
@@ -219,22 +218,20 @@
   if (drawerClose) drawerClose.addEventListener("click", closeDrawer);
   if (overlay) overlay.addEventListener("click", closeDrawer);
 
-  /* Checkout button → smooth-scroll to waitlist and close drawer */
+  /* Checkout → compose WhatsApp message with bag contents */
   if (checkoutBtn) {
     checkoutBtn.addEventListener("click", function () {
       if (checkoutBtn.disabled) return;
+      var lines = bag.map(function (i) {
+        return i.name + " (Size: " + (i.size || "One size") + ") x" + i.qty;
+      });
+      var total = bag.reduce(function (s, i) { return s + i.qty * i.price; }, 0);
+      var msg = "Hi The Common Athlete! I'd like to order:\n\n" +
+        lines.join("\n") +
+        "\n\nSubtotal: S$" + total.toFixed(2) +
+        "\n\nPlease confirm and send payment details. Thank you!";
       closeDrawer();
-      setTimeout(function () {
-        var wl = document.getElementById("waitlist");
-        if (wl) wl.scrollIntoView({ behavior: "smooth" });
-      }, 350);
-    });
-  }
-
-  /* Waitlist CTA in drawer — close drawer first */
-  if (drawerWaitlistCta) {
-    drawerWaitlistCta.addEventListener("click", function () {
-      closeDrawer();
+      window.open("https://wa.me/6597799779?text=" + encodeURIComponent(msg), "_blank", "noopener");
     });
   }
 
@@ -356,41 +353,6 @@
 
   /* ---------- Show persisted bag on load ---------- */
   renderBag();
-
-  /* ---------- Countdown to launch ---------- */
-  var countdown = document.getElementById("countdown");
-  var countdownLive = document.getElementById("countdownLive");
-  var countdownCaption = document.querySelector(".countdown__caption");
-  if (countdown) {
-    var target = new Date(countdown.getAttribute("data-launch")).getTime();
-    var fields = {
-      days:  countdown.querySelector('[data-cd="days"]'),
-      hours: countdown.querySelector('[data-cd="hours"]'),
-      mins:  countdown.querySelector('[data-cd="mins"]'),
-      secs:  countdown.querySelector('[data-cd="secs"]')
-    };
-    var pad = function (n) { return (n < 10 ? "0" : "") + n; };
-    var timer;
-    var tick = function () {
-      var diff = target - Date.now();
-      if (diff <= 0) {
-        fields.days.textContent = fields.hours.textContent =
-          fields.mins.textContent = fields.secs.textContent = "00";
-        countdown.classList.add("countdown--live");
-        if (countdownLive) countdownLive.classList.add("is-visible");
-        if (countdownCaption) countdownCaption.hidden = true;
-        clearInterval(timer);
-        return;
-      }
-      var s = Math.floor(diff / 1000);
-      fields.days.textContent  = pad(Math.floor(s / 86400));
-      fields.hours.textContent = pad(Math.floor((s % 86400) / 3600));
-      fields.mins.textContent  = pad(Math.floor((s % 3600) / 60));
-      fields.secs.textContent  = pad(s % 60);
-    };
-    tick();
-    timer = setInterval(tick, 1000);
-  }
 
   /* ---------- Active nav link on scroll ---------- */
   var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav__links a"));
