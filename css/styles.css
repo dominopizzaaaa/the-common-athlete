@@ -857,34 +857,6 @@ fieldset.field { border: none; padding: 0; }
 }
 .set-buy__actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-/* ---------- Countdown ---------- */
-.countdown { display: flex; gap: 10px; margin: 24px 0 8px; }
-.countdown__unit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 62px;
-  padding: 12px 8px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-.countdown__num {
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-}
-.countdown__label {
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 6px;
-}
-.countdown__caption { font-size: 0.8rem; margin-top: 4px; }
-
 /* ---------- Consent checkbox ---------- */
 .consent {
   align-items: flex-start;
@@ -1047,27 +1019,6 @@ fieldset.field { border: none; padding: 0; }
 }
 .ph__swatch-overlay.is-active { opacity: 0.6; }
 .ph--card img { transition: filter 0.4s var(--ease); }
-
-/* ---------- Countdown "We're live!" state ---------- */
-.countdown--live .countdown__unit {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-.countdown--live .countdown__num { color: var(--bg); }
-.countdown--live .countdown__label { color: rgba(248,246,241,.75); }
-#countdownLive {
-  display: none;
-  font-family: "Space Grotesk", sans-serif;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--accent);
-  margin: 16px 0 4px;
-}
-#countdownLive.is-visible { display: block; }
-
-/* ---------- Drawer waitlist CTA ---------- */
-.drawer__waitlist-cta { margin-top: 10px; border-color: var(--border); }
-.drawer__waitlist-cta:hover { background: var(--text); color: var(--bg); border-color: var(--text); }
 
 /* ---------- Blog article enhancements ---------- */
 .article p,
