@@ -279,14 +279,13 @@
       var sw = e.target.closest(".sw");
       if (!sw) return;
 
-      /* Deselect all, mark selected */
+      /* Deselect all, mark selected. Use a class (box-shadow ring) rather than
+         an inline outline so it never collides with the keyboard focus ring. */
       group.querySelectorAll(".sw").forEach(function (s) {
-        s.style.outline = "";
-        s.style.outlineOffset = "";
+        s.classList.remove("is-selected");
         s.setAttribute("aria-pressed", "false");
       });
-      sw.style.outline = "1.5px solid var(--text)";
-      sw.style.outlineOffset = "2px";
+      sw.classList.add("is-selected");
       sw.setAttribute("aria-pressed", "true");
 
       /* Update colour label */
@@ -309,13 +308,49 @@
       }
     });
 
-    /* Keyboard support for swatch dots */
+    /* Keyboard support + reliable accessible name for each swatch dot */
     group.querySelectorAll(".sw").forEach(function (sw) {
+      if (!sw.getAttribute("aria-label")) {
+        sw.setAttribute("aria-label", sw.getAttribute("title") || sw.dataset.color || "Colour");
+      }
       sw.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sw.click(); }
       });
     });
   });
+
+  /* ---------- Email signup forms (waitlist + footer newsletter) ----------
+     Set FORM_ENDPOINT to your form service / email provider URL (e.g. a
+     Formspree endpoint "https://formspree.io/f/xxxxxxxx", a Klaviyo/Mailchimp
+     proxy, or your own handler). When set, signups are POSTed there as
+     FormData. While it's empty, the forms still validate and show the success
+     message so the UI works locally — they just don't send anywhere yet. */
+  var FORM_ENDPOINT = "";
+
+  // Submit a form's fields to FORM_ENDPOINT. Resolves true on success (or when
+  // no endpoint is configured), false on network/server error.
+  function submitSignup(form) {
+    if (!FORM_ENDPOINT) return Promise.resolve(true);
+    return fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: new FormData(form)
+    })
+      .then(function (res) { return res.ok; })
+      .catch(function () { return false; });
+  }
+
+  // Briefly disable the submit button and show a sending label while in flight.
+  function withPending(btn, run) {
+    if (!btn) { run(); return; }
+    var label = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "Sending…";
+    Promise.resolve(run()).then(function () {
+      btn.disabled = false;
+      btn.textContent = label;
+    });
+  }
 
   /* ---------- Waitlist form ---------- */
   var waitlistForm = document.getElementById("waitlistForm");

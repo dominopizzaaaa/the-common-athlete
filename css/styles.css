@@ -132,6 +132,19 @@ h1, h2, h3, h4 {
 }
 .skip-link:focus { top: 0; outline: 2px solid var(--bg); outline-offset: 2px; }
 
+/* ---------- Global keyboard focus ----------
+   A consistent, visible focus ring for keyboard users on every interactive
+   control. :focus-visible keeps it off for mouse clicks. Form inputs keep
+   their accent-border treatment, so opt them out of the ring. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.field input:focus-visible,
+.field select:focus-visible,
+.footer__form input:focus-visible { outline: none; }
+
 /* ---------- Announcement bar ---------- */
 .announce {
   background: var(--accent);
@@ -404,6 +417,11 @@ h1, h2, h3, h4 {
   transition: transform .15s var(--ease);
 }
 .sw:hover { transform: scale(1.15); }
+/* Selected colour: outer ring via box-shadow (keeps the inner white ring,
+   leaves `outline` free for the keyboard focus indicator). */
+.sw.is-selected {
+  box-shadow: inset 0 0 0 2px var(--bg), 0 0 0 2px var(--text);
+}
 .sw--black    { background: #1a1a1a; }
 .sw--espresso { background: #5B4636; }
 .sw--oat      { background: #D8CBB8; }
