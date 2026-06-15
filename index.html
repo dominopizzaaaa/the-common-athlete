@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Common Athlete — minimal, functional activewear for the everyday athlete. Singapore-made activewear for gym, run, Pilates, and real life." />
+  <meta name="theme-color" content="#F8F6F1" />
+  <title>The Common Athlete — Activewear for the everyday athlete</title>
+
+  <!-- Fonts: Space Grotesk for headings, Inter for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ============ ANNOUNCEMENT BAR ============ -->
+  <div class="announce">
+    <p>The first drop is coming soon — join the waitlist for early access &amp; first-drop pricing.</p>
+  </div>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a href="#top" class="nav__logo">THE COMMON ATHLETE</a>
+
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#collection">Shop</a>
+        <a href="#collection">Collection</a>
+        <a href="#about">About</a>
+        <a href="#fit">Fit Guide</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="nav__bag" id="bagBtn" aria-label="Open bag">
+        Bag <span class="nav__bag-count" id="bagCount">0</span>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Mobile">
+        <a href="#collection" class="mobile-menu__link">Shop</a>
+        <a href="#collection" class="mobile-menu__link">Collection</a>
+        <a href="#about" class="mobile-menu__link">About</a>
+        <a href="#fit" class="mobile-menu__link">Fit Guide</a>
+        <a href="#contact" class="mobile-menu__link">Contact</a>
+        <a href="#waitlist" class="mobile-menu__link mobile-menu__cta">Join the waitlist</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <span class="eyebrow">For the everyday athlete</span>
+          <h1 class="hero__title">Activewear for the everyday&nbsp;athlete.</h1>
+          <p class="hero__sub">Minimal, functional pieces made for gym days, slow runs, coffee runs, and everything in between.</p>
+          <div class="hero__cta">
+            <a href="#collection" class="btn btn--solid">Shop the first drop</a>
+            <a href="#collection" class="btn btn--outline">Explore the collection</a>
+          </div>
+          <p class="hero__note">Made in Singapore · Breathable for the heat · No luxury markup</p>
+        </div>
+
+        <div class="hero__visual">
+          <!-- Editorial placeholder block; swap for a model image later -->
+          <div class="ph ph--hero" role="img" aria-label="Model wearing a matching activewear set">
+            <span class="ph__label">The Everyday Set</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BRAND PROMISE STRIP ============ -->
+    <section class="promise" aria-label="Brand promises">
+      <div class="container promise__row">
+        <div class="promise__item"><span class="promise__k">01</span><p>Made for Singapore heat</p></div>
+        <div class="promise__item"><span class="promise__k">02</span><p>Removable padding</p></div>
+        <div class="promise__item"><span class="promise__k">03</span><p>Pockets that fit your phone</p></div>
+        <div class="promise__item"><span class="promise__k">04</span><p>No luxury markup</p></div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURED COLLECTION ============ -->
+    <section class="section" id="collection">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow">The First Drop</span>
+          <h2 class="section__title">Clean, everyday staples made to move with you.</h2>
+        </header>
+
+        <div class="grid grid--products" id="productGrid">
+          <!-- Product 1 -->
+          <article class="card" data-name="Longline Active Crop" data-price="32.90">
+            <div class="ph ph--card ph--tone-espresso" role="img" aria-label="Longline Active Crop"></div>
+            <div class="card__body">
+              <div class="card__top">
+                <h3 class="card__name">Longline Active Crop</h3>
+                <span class="card__price">S$32.90</span>
+              </div>
+              <p class="card__desc">Padded longline crop with removable cups. Low-to-medium support that wears as easily as a top.</p>
+              <ul class="swatches" aria-label="Available colours">
+                <li class="sw sw--black" title="Black"></li>
+                <li class="sw sw--espresso" title="Espresso"></li>
+                <li class="sw sw--oat" title="Oat"></li>
+                <li class="sw sw--slate" title="Slate Grey"></li>
+                <li class="sw sw--white" title="White"></li>
+              </ul>
+              <button class="btn btn--solid btn--block add-to-bag">Add to bag</button>
+            </div>
+          </article>
+
+          <!-- Product 2 -->
+          <article class="card" data-name="Biker Shorts with Pockets" data-price="36.90">
+            <div class="ph ph--card ph--tone-slate" role="img" aria-label="Biker Shorts with Pockets"></div>
+            <div class="card__body">
+              <div class="card__top">
+                <h3 class="card__name">Biker Shorts with Pockets</h3>
+                <span class="card__price">S$36.90</span>
+              </div>
+              <p class="card__desc">High-waisted, squat-proof shorts with sleek side pockets for your phone and keys.</p>
+              <ul class="swatches" aria-label="Available colours">
+                <li class="sw sw--black" title="Black"></li>
+                <li class="sw sw--espresso" title="Espresso"></li>
+                <li class="sw sw--oat" title="Oat"></li>
+                <li class="sw sw--slate" title="Slate Grey"></li>
+                <li class="sw sw--white" title="White"></li>
+              </ul>
+              <button class="btn btn--solid btn--block add-to-bag">Add to bag</button>
+            </div>
+          </article>
+
+          <!-- Product 3 -->
+          <article class="card" data-name="Oversized Cover Tee" data-price="29.90">
+            <div class="ph ph--card ph--tone-oat" role="img" aria-label="Oversized Cover Tee"></div>
+            <div class="card__body">
+              <div class="card__top">
+                <h3 class="card__name">Oversized Cover Tee</h3>
+                <span class="card__price">S$29.90</span>
+              </div>
+              <p class="card__desc">A relaxed, unisex-friendly tee to throw over your set. Gym pump cover meets everyday layer.</p>
+              <ul class="swatches" aria-label="Available colours">
+                <li class="sw sw--black" title="Black"></li>
+                <li class="sw sw--espresso" title="Espresso"></li>
+                <li class="sw sw--oat" title="Oat"></li>
+                <li class="sw sw--slate" title="Slate Grey"></li>
+                <li class="sw sw--white" title="White"></li>
+              </ul>
+              <button class="btn btn--solid btn--block add-to-bag">Add to bag</button>
+            </div>
+          </article>
+
+          <!-- Product 4 -->
+          <article class="card" data-name="Everyday Crew Socks" data-price="8.90">
+            <div class="ph ph--card ph--tone-white" role="img" aria-label="Everyday Crew Socks"></div>
+            <div class="card__body">
+              <div class="card__top">
+                <h3 class="card__name">Everyday Crew Socks</h3>
+                <span class="card__price">S$8.90</span>
+              </div>
+              <p class="card__desc">Minimal-logo crew socks for training and daily wear. The easy bundle add-on.</p>
+              <ul class="swatches" aria-label="Available colours">
+                <li class="sw sw--black" title="Black"></li>
+                <li class="sw sw--oat" title="Oat"></li>
+                <li class="sw sw--white" title="White"></li>
+              </ul>
+              <button class="btn btn--solid btn--block add-to-bag">Add to bag</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COLLECTION HIGHLIGHT — THE EVERYDAY SET ============ -->
+    <section class="section section--alt" id="set">
+      <div class="container highlight">
+        <div class="highlight__visual">
+          <div class="ph ph--tall ph--tone-espresso" role="img" aria-label="The Everyday Set — crop and biker shorts">
+            <span class="ph__label">The Everyday Set</span>
+          </div>
+        </div>
+        <div class="highlight__copy">
+          <span class="eyebrow">Build your set</span>
+          <h2 class="section__title">The Everyday Set</h2>
+          <p class="lead">A longline active crop and high-waisted biker short made for movement, errands, and everything after.</p>
+          <ul class="feature-list">
+            <li>Removable cups</li>
+            <li>Low-to-medium support</li>
+            <li>High-waisted fit</li>
+            <li>Side pockets</li>
+            <li>Soft compression</li>
+            <li>Minimal branding</li>
+          </ul>
+          <a href="#waitlist" class="btn btn--solid">Build your set</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LIFESTYLE ============ -->
+    <section class="section" id="lifestyle">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow">One wardrobe, many ways</span>
+          <h2 class="section__title">Made for more than one kind of athlete.</h2>
+        </header>
+
+        <div class="grid grid--life">
+          <article class="tile">
+            <div class="ph ph--tile ph--tone-slate" aria-hidden="true"></div>
+            <h3 class="tile__name">Gym</h3>
+            <p>Supportive staples for strength days.</p>
+          </article>
+          <article class="tile">
+            <div class="ph ph--tile ph--tone-oat" aria-hidden="true"></div>
+            <h3 class="tile__name">Run</h3>
+            <p>Light, breathable pieces for easy miles.</p>
+          </article>
+          <article class="tile">
+            <div class="ph ph--tile ph--tone-espresso" aria-hidden="true"></div>
+            <h3 class="tile__name">Pilates</h3>
+            <p>Soft fits that move with you.</p>
+          </article>
+          <article class="tile">
+            <div class="ph ph--tile ph--tone-white" aria-hidden="true"></div>
+            <h3 class="tile__name">Everyday</h3>
+            <p>Throw-on pieces for coffee runs and rest days.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section section--alt" id="about">
+      <div class="container about">
+        <div class="about__copy">
+          <span class="eyebrow">About</span>
+          <h2 class="section__title">Common, not ordinary.</h2>
+          <p class="lead">The Common Athlete was created for people who show up in small, consistent ways. You don't need to be elite to dress like movement is part of your life.</p>
+          <p>Our pieces are minimal, functional, and priced without the luxury markup — made for everyday athletes in real life.</p>
+        </div>
+        <div class="about__visual">
+          <div class="ph ph--tall ph--tone-oat" role="img" aria-label="Everyday athletes in The Common Athlete">
+            <span class="ph__label">Train, run, live.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FIT & FUNCTION ============ -->
+    <section class="section" id="fit">
+      <div class="container">
+        <header class="section__head">
+          <span class="eyebrow">Fit &amp; Function</span>
+          <h2 class="section__title">Designed around how you actually move.</h2>
+        </header>
+
+        <div class="grid grid--features">
+          <div class="feat"><span class="feat__k">+</span>Removable padding</div>
+          <div class="feat"><span class="feat__k">+</span>Soft compression</div>
+          <div class="feat"><span class="feat__k">+</span>No-fuss basics</div>
+          <div class="feat"><span class="feat__k">+</span>Sweat-friendly fabric</div>
+          <div class="feat"><span class="feat__k">+</span>Sleek pockets</div>
+          <div class="feat"><span class="feat__k">+</span>Neutral colours</div>
+          <div class="feat"><span class="feat__k">+</span>Easy to mix and match</div>
+          <div class="feat"><span class="feat__k">+</span>Designed for warm weather</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WAITLIST / NEWSLETTER ============ -->
+    <section class="section section--alt" id="waitlist">
+      <div class="container waitlist">
+        <div class="waitlist__head">
+          <span class="eyebrow">Early access</span>
+          <h2 class="section__title">Join the first drop.</h2>
+          <p class="lead">Be first to know when The Common Athlete launches. Early access, first-drop pricing, and limited launch bundles.</p>
+        </div>
+
+        <form class="waitlist__form" id="waitlistForm" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" required />
+          </div>
+
+          <div class="field">
+            <label for="size">Preferred size <span class="muted">(optional)</span></label>
+            <select id="size" name="size">
+              <option value="">Select a size</option>
+              <option value="XS">XS</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </div>
+
+          <fieldset class="field field--full">
+            <legend>Interested in <span class="muted">(optional)</span></legend>
+            <div class="checks">
+              <label class="check"><input type="checkbox" name="interest" value="Longline Active Crop" /> Longline Active Crop</label>
+              <label class="check"><input type="checkbox" name="interest" value="Biker Shorts" /> Biker Shorts</label>
+              <label class="check"><input type="checkbox" name="interest" value="Oversized Cover Tee" /> Oversized Cover Tee</label>
+              <label class="check"><input type="checkbox" name="interest" value="Crew Socks" /> Crew Socks</label>
+            </div>
+          </fieldset>
+
+          <div class="field field--full">
+            <button type="submit" class="btn btn--solid btn--block">Join the waitlist</button>
+            <p class="form__note">No spam. Just launch updates and early access.</p>
+          </div>
+
+          <p class="form__success" id="waitlistSuccess" hidden>You're on the list — we'll be in touch before the first drop.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ COMMUNITY / PRE-LAUNCH ============ -->
+    <section class="section community" aria-label="Pre-launch notes">
+      <div class="container community__row">
+        <div class="community__item">
+          <span class="community__dot"></span>
+          <p>Sample testing in progress</p>
+        </div>
+        <div class="community__item">
+          <span class="community__dot"></span>
+          <p>Built with feedback from everyday athletes</p>
+        </div>
+        <div class="community__item">
+          <span class="community__dot"></span>
+          <p>Designed for gym, run, Pilates, and daily movement</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="contact">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <a href="#top" class="footer__logo">THE COMMON ATHLETE</a>
+        <p class="footer__line">Activewear for movement, comfort, and real life. Made in Singapore.</p>
+      </div>
+
+      <nav class="footer__col" aria-label="Footer shop">
+        <h4>Shop</h4>
+        <a href="#collection">First Drop</a>
+        <a href="#set">The Everyday Set</a>
+        <a href="#fit">Fit Guide</a>
+      </nav>
+
+      <nav class="footer__col" aria-label="Footer brand">
+        <h4>Brand</h4>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="TikTok">TikTok</a>
+      </nav>
+
+      <div class="footer__col footer__news">
+        <h4>Stay in the loop</h4>
+        <p class="footer__line">Launch updates and early access only.</p>
+        <form class="footer__form" id="footerForm" novalidate>
+          <input type="email" name="email" placeholder="you@email.com" aria-label="Email" required />
+          <button type="submit" class="btn btn--solid">Join</button>
+        </form>
+        <p class="footer__msg" id="footerMsg" hidden>Thanks — you're on the list.</p>
+      </div>
+    </div>
+
+    <div class="container footer__base">
+      <p>© <span id="year"></span> The Common Athlete. All rights reserved.</p>
+      <p>Built for sweat. Designed for every day.</p>
+    </div>
+  </footer>
+
+  <!-- ============ BAG DRAWER ============ -->
+  <div class="drawer-overlay" id="drawerOverlay" hidden></div>
+  <aside class="drawer" id="bagDrawer" aria-label="Shopping bag" aria-hidden="true">
+    <div class="drawer__head">
+      <h3>Your bag</h3>
+      <button class="drawer__close" id="drawerClose" aria-label="Close bag">&times;</button>
+    </div>
+    <div class="drawer__body" id="drawerBody">
+      <p class="drawer__empty">Your bag is empty.</p>
+    </div>
+    <div class="drawer__foot">
+      <div class="drawer__total"><span>Subtotal</span><span id="drawerTotal">S$0.00</span></div>
+      <button class="btn btn--solid btn--block" id="checkoutBtn" disabled>Checkout</button>
+      <p class="drawer__note">This is a launch preview — checkout opens at the first drop.</p>
+    </div>
+  </aside>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
