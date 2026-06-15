@@ -36,7 +36,8 @@
   }
 
   /* ---------- Bag / cart drawer ---------- */
-  var bag = [];                                            // [{name, price, qty}]
+  var STORAGE_KEY = "tca_bag";
+  var bag = loadBag();                                     // [{name, price, img, size, qty}]
   var bagBtn = document.getElementById("bagBtn");
   var bagCount = document.getElementById("bagCount");
   var drawer = document.getElementById("bagDrawer");
@@ -47,6 +48,15 @@
   var checkoutBtn = document.getElementById("checkoutBtn");
 
   function money(n) { return "S$" + n.toFixed(2); }
+
+  function loadBag() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch (e) { return []; }
+  }
+  function saveBag() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(bag)); }
+    catch (e) { /* storage unavailable — ignore */ }
+  }
 
   function openDrawer() {
     drawer.classList.add("is-open");
@@ -64,6 +74,7 @@
   }
 
   function renderBag() {
+    saveBag();
     var count = bag.reduce(function (s, i) { return s + i.qty; }, 0);
     var total = bag.reduce(function (s, i) { return s + i.qty * i.price; }, 0);
     if (bagCount) bagCount.textContent = String(count);
@@ -77,11 +88,13 @@
     }
 
     drawerBody.innerHTML = bag.map(function (item, idx) {
+      var sizeLabel = item.size ? '<div class="bag-item__size">Size: ' + item.size + '</div>' : '';
       return (
         '<div class="bag-item">' +
           '<div class="bag-item__thumb ph"><img src="' + item.img + '" alt="" /></div>' +
           '<div class="bag-item__info">' +
             '<div class="bag-item__name">' + item.name + '</div>' +
+            sizeLabel +
             '<div class="bag-item__price">' + money(item.price) + '</div>' +
             '<div class="bag-item__qty">' +
               '<button data-act="dec" data-idx="' + idx + '" aria-label="Decrease quantity">−</button>' +
@@ -95,12 +108,32 @@
     }).join("");
   }
 
-  function addToBag(name, price, img) {
-    var existing = bag.find(function (i) { return i.name === name; });
+  function addToBag(name, price, img, size) {
+    var existing = bag.find(function (i) { return i.name === name && i.size === size; });
     if (existing) { existing.qty += 1; }
-    else { bag.push({ name: name, price: price, img: img, qty: 1 }); }
+    else { bag.push({ name: name, price: price, img: img, size: size, qty: 1 }); }
     renderBag();
     openDrawer();
+  }
+
+  // Single-select size pills
+  document.querySelectorAll(".sizes").forEach(function (group) {
+    group.addEventListener("click", function (e) {
+      var pill = e.target.closest(".size");
+      if (!pill) return;
+      group.classList.remove("needs-pick");
+      group.querySelectorAll(".size").forEach(function (s) { s.classList.remove("is-active"); });
+      pill.classList.add("is-active");
+    });
+  });
+
+  function selectedSize(scope) {
+    var active = scope.querySelector(".size.is-active");
+    return active ? active.textContent.trim() : "";
+  }
+  function requireSize(group) {
+    group.classList.add("needs-pick");
+    setTimeout(function () { group.classList.remove("needs-pick"); }, 600);
   }
 
   // Wire up "Add to bag" buttons on product cards
@@ -108,9 +141,25 @@
     btn.addEventListener("click", function () {
       var card = btn.closest(".card");
       if (!card) return;
-      addToBag(card.dataset.name, parseFloat(card.dataset.price), card.dataset.img);
+      var group = card.querySelector(".sizes");
+      var size = selectedSize(card);
+      if (group && !size) { requireSize(group); return; }
+      addToBag(card.dataset.name, parseFloat(card.dataset.price), card.dataset.img, size);
     });
   });
+
+  // "Add set to bag" — the Everyday Set bundle
+  var addSetBtn = document.querySelector(".add-set");
+  if (addSetBtn) {
+    addSetBtn.addEventListener("click", function () {
+      var scope = document.querySelector(".set-buy");
+      if (!scope) return;
+      var group = scope.querySelector(".sizes");
+      var size = selectedSize(scope);
+      if (group && !size) { requireSize(group); return; }
+      addToBag(scope.dataset.name, parseFloat(scope.dataset.price), scope.dataset.img, size);
+    });
+  }
 
   // Quantity / remove controls (event delegation)
   if (drawerBody) {
@@ -158,6 +207,16 @@
         email.focus();
         return;
       }
+      var consent = waitlistForm.querySelector("#consent");
+      var consentLabel = consent ? consent.closest(".consent") : null;
+      if (consent && !consent.checked) {
+        if (consentLabel) {
+          consentLabel.classList.add("needs-pick");
+          setTimeout(function () { consentLabel.classList.remove("needs-pick"); }, 1200);
+        }
+        consent.focus();
+        return;
+      }
       waitlistForm.querySelectorAll("input, select, button").forEach(function (el) {
         if (el.type !== "submit") el.value = el.type === "checkbox" ? el.value : "";
         if (el.type === "checkbox") el.checked = false;
@@ -198,5 +257,77 @@
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+  }
+
+  /* ---------- Show persisted bag on load ---------- */
+  renderBag();
+
+  /* ---------- Countdown to launch ---------- */
+  var countdown = document.getElementById("countdown");
+  if (countdown) {
+    var target = new Date(countdown.getAttribute("data-launch")).getTime();
+    var fields = {
+      days: countdown.querySelector('[data-cd="days"]'),
+      hours: countdown.querySelector('[data-cd="hours"]'),
+      mins: countdown.querySelector('[data-cd="mins"]'),
+      secs: countdown.querySelector('[data-cd="secs"]')
+    };
+    var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    var tick = function () {
+      var diff = target - Date.now();
+      if (diff <= 0) {
+        fields.days.textContent = fields.hours.textContent =
+          fields.mins.textContent = fields.secs.textContent = "00";
+        clearInterval(timer);
+        return;
+      }
+      var s = Math.floor(diff / 1000);
+      fields.days.textContent = pad(Math.floor(s / 86400));
+      fields.hours.textContent = pad(Math.floor((s % 86400) / 3600));
+      fields.mins.textContent = pad(Math.floor((s % 3600) / 60));
+      fields.secs.textContent = pad(s % 60);
+    };
+    tick();
+    var timer = setInterval(tick, 1000);
+  }
+
+  /* ---------- Active nav link on scroll ---------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll(".nav__links a"));
+  var sectionMap = {};
+  navLinks.forEach(function (link) {
+    var id = link.getAttribute("href");
+    if (id && id.charAt(0) === "#" && id.length > 1) {
+      var sec = document.querySelector(id);
+      if (sec) sectionMap[id] = link;
+    }
+  });
+  if ("IntersectionObserver" in window && Object.keys(sectionMap).length) {
+    var navIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          navLinks.forEach(function (l) { l.classList.remove("is-active"); });
+          var active = sectionMap["#" + entry.target.id];
+          if (active) active.classList.add("is-active");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    Object.keys(sectionMap).forEach(function (id) {
+      navIo.observe(document.querySelector(id));
+    });
+  }
+
+  /* ---------- Back to top ---------- */
+  var toTop = document.getElementById("toTop");
+  if (toTop) {
+    var onScroll = function () {
+      var show = window.scrollY > 600;
+      toTop.hidden = false;
+      toTop.classList.toggle("is-visible", show);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    toTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
   }
 })();
