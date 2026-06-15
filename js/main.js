@@ -159,6 +159,37 @@
     setTimeout(function () { group.classList.remove("needs-pick"); }, 600);
   }
 
+  /* ---------- Read product details from the rendered markup ----------
+     The visible price/name/image are the single source of truth, so editing
+     copy in index.html keeps the bag in sync automatically. Each lookup falls
+     back to a data-* attribute, then a sensible default. */
+  function parsePrice(text) {
+    // Strip currency symbols/whitespace, keep digits + decimal point.
+    var n = parseFloat((text || "").replace(/[^0-9.]/g, ""));
+    return isNaN(n) ? 0 : n;
+  }
+  function textOf(scope, selector) {
+    var el = scope.querySelector(selector);
+    return el ? el.textContent.trim() : "";
+  }
+  function readProduct(scope, priceSelector) {
+    var img = scope.querySelector("img");
+    return {
+      name: textOf(scope, ".card__name") || scope.dataset.name || "",
+      price: parsePrice(textOf(scope, priceSelector)) || parseFloat(scope.dataset.price) || 0,
+      img: (img && img.getAttribute("src")) || scope.dataset.img || ""
+    };
+  }
+  function flashAdded(btn) {
+    var orig = btn.textContent;
+    btn.classList.add("btn--added");
+    btn.textContent = "✓ Added";
+    setTimeout(function () {
+      btn.classList.remove("btn--added");
+      btn.textContent = orig;
+    }, 900);
+  }
+
   /* ---------- "Add to bag" with success feedback ---------- */
   document.querySelectorAll(".add-to-bag").forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -168,15 +199,9 @@
       var size = selectedSize(card);
       if (group && !size) { requireSize(group); return; }
 
-      var orig = btn.textContent;
-      btn.classList.add("btn--added");
-      btn.textContent = "✓ Added";
-      setTimeout(function () {
-        btn.classList.remove("btn--added");
-        btn.textContent = orig;
-      }, 900);
-
-      addToBag(card.dataset.name, parseFloat(card.dataset.price), card.dataset.img, size);
+      flashAdded(btn);
+      var p = readProduct(card, ".card__price");
+      addToBag(p.name, p.price, p.img, size);
     });
   });
 
@@ -189,14 +214,15 @@
       var group = scope.querySelector(".sizes");
       var size = selectedSize(scope);
       if (group && !size) { requireSize(group); return; }
-      var orig = addSetBtn.textContent;
-      addSetBtn.classList.add("btn--added");
-      addSetBtn.textContent = "✓ Added";
-      setTimeout(function () {
-        addSetBtn.classList.remove("btn--added");
-        addSetBtn.textContent = orig;
-      }, 900);
-      addToBag(scope.dataset.name, parseFloat(scope.dataset.price), scope.dataset.img, size);
+
+      flashAdded(addSetBtn);
+      // The set's price is shown in .set-price__now (single source of truth);
+      // name + image stay on the .set-buy data-* attributes since they aren't
+      // rendered elsewhere in a reusable form.
+      var section = document.getElementById("set");
+      var price = parsePrice(section ? textOf(section, ".set-price__now") : "")
+        || parseFloat(scope.dataset.price) || 0;
+      addToBag(scope.dataset.name, price, scope.dataset.img, size);
     });
   }
 
