@@ -1,7 +1,5 @@
 /* ==========================================================================
    The Common Athlete — main.js
-   Mobile menu, bag drawer, waitlist forms, and scroll reveal.
-   No dependencies. Vanilla JS.
    ========================================================================== */
 (function () {
   "use strict";
@@ -9,6 +7,21 @@
   /* ---------- Current year in footer ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  /* ---------- Announcement bar dismiss ---------- */
+  var announceBar = document.getElementById("announce");
+  var announceClose = document.getElementById("announceClose");
+  if (announceBar && announceClose) {
+    try {
+      if (sessionStorage.getItem("tca_announce_closed") === "1") {
+        announceBar.style.display = "none";
+      }
+    } catch (e) {}
+    announceClose.addEventListener("click", function () {
+      announceBar.style.display = "none";
+      try { sessionStorage.setItem("tca_announce_closed", "1"); } catch (e) {}
+    });
+  }
 
   /* ---------- Mobile menu toggle ---------- */
   var burger = document.getElementById("burger");
@@ -19,6 +32,7 @@
     burger.classList.remove("is-open");
     mobileMenu.classList.remove("is-open");
     burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-label", "Open menu");
     mobileMenu.setAttribute("aria-hidden", "true");
   }
 
@@ -27,17 +41,26 @@
       var open = mobileMenu.classList.toggle("is-open");
       burger.classList.toggle("is-open", open);
       burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       mobileMenu.setAttribute("aria-hidden", String(!open));
     });
-    // Close menu when a link is tapped
     mobileMenu.querySelectorAll("a").forEach(function (link) {
       link.addEventListener("click", closeMobileMenu);
     });
   }
 
+  /* ---------- FAQ aria-expanded ---------- */
+  document.querySelectorAll(".faq__item").forEach(function (item) {
+    var summary = item.querySelector("summary");
+    if (!summary) return;
+    item.addEventListener("toggle", function () {
+      summary.setAttribute("aria-expanded", String(item.open));
+    });
+  });
+
   /* ---------- Bag / cart drawer ---------- */
   var STORAGE_KEY = "tca_bag";
-  var bag = loadBag();                                     // [{name, price, img, size, qty}]
+  var bag = loadBag();
   var bagBtn = document.getElementById("bagBtn");
   var bagCount = document.getElementById("bagCount");
   var drawer = document.getElementById("bagDrawer");
@@ -46,6 +69,7 @@
   var drawerBody = document.getElementById("drawerBody");
   var drawerTotal = document.getElementById("drawerTotal");
   var checkoutBtn = document.getElementById("checkoutBtn");
+  var drawerWaitlistCta = document.getElementById("drawerWaitlistCta");
 
   function money(n) { return "S$" + n.toFixed(2); }
 
@@ -55,7 +79,7 @@
   }
   function saveBag() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(bag)); }
-    catch (e) { /* storage unavailable — ignore */ }
+    catch (e) {}
   }
 
   function openDrawer() {
@@ -116,7 +140,7 @@
     openDrawer();
   }
 
-  // Single-select size pills
+  /* ---------- Size pill selection ---------- */
   document.querySelectorAll(".sizes").forEach(function (group) {
     group.addEventListener("click", function (e) {
       var pill = e.target.closest(".size");
@@ -136,7 +160,7 @@
     setTimeout(function () { group.classList.remove("needs-pick"); }, 600);
   }
 
-  // Wire up "Add to bag" buttons on product cards
+  /* ---------- "Add to bag" with success feedback ---------- */
   document.querySelectorAll(".add-to-bag").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var card = btn.closest(".card");
@@ -144,11 +168,20 @@
       var group = card.querySelector(".sizes");
       var size = selectedSize(card);
       if (group && !size) { requireSize(group); return; }
+
+      var orig = btn.textContent;
+      btn.classList.add("btn--added");
+      btn.textContent = "✓ Added";
+      setTimeout(function () {
+        btn.classList.remove("btn--added");
+        btn.textContent = orig;
+      }, 900);
+
       addToBag(card.dataset.name, parseFloat(card.dataset.price), card.dataset.img, size);
     });
   });
 
-  // "Add set to bag" — the Everyday Set bundle
+  /* ---------- "Add set" — Everyday Set bundle ---------- */
   var addSetBtn = document.querySelector(".add-set");
   if (addSetBtn) {
     addSetBtn.addEventListener("click", function () {
@@ -157,11 +190,18 @@
       var group = scope.querySelector(".sizes");
       var size = selectedSize(scope);
       if (group && !size) { requireSize(group); return; }
+      var orig = addSetBtn.textContent;
+      addSetBtn.classList.add("btn--added");
+      addSetBtn.textContent = "✓ Added";
+      setTimeout(function () {
+        addSetBtn.classList.remove("btn--added");
+        addSetBtn.textContent = orig;
+      }, 900);
       addToBag(scope.dataset.name, parseFloat(scope.dataset.price), scope.dataset.img, size);
     });
   }
 
-  // Quantity / remove controls (event delegation)
+  /* ---------- Quantity / remove controls ---------- */
   if (drawerBody) {
     drawerBody.addEventListener("click", function (e) {
       var t = e.target.closest("button[data-act]");
@@ -178,21 +218,79 @@
   if (bagBtn) bagBtn.addEventListener("click", openDrawer);
   if (drawerClose) drawerClose.addEventListener("click", closeDrawer);
   if (overlay) overlay.addEventListener("click", closeDrawer);
+
+  /* Checkout button → smooth-scroll to waitlist and close drawer */
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener("click", function () {
+      if (checkoutBtn.disabled) return;
+      closeDrawer();
+      setTimeout(function () {
+        var wl = document.getElementById("waitlist");
+        if (wl) wl.scrollIntoView({ behavior: "smooth" });
+      }, 350);
+    });
+  }
+
+  /* Waitlist CTA in drawer — close drawer first */
+  if (drawerWaitlistCta) {
+    drawerWaitlistCta.addEventListener("click", function () {
+      closeDrawer();
+    });
+  }
+
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") { closeDrawer(); closeMobileMenu(); }
   });
 
-  /* ---------- Swatch selection (visual only) ---------- */
+  /* ---------- Swatch selection — colour overlay + label ---------- */
+  var swatchColorMap = {
+    "black":    "#1a1a1a",
+    "espresso": "#5B4636",
+    "oat":      "#D8CBB8",
+    "slate":    "#7c7e80",
+    "white":    "#f3f0ea"
+  };
+
   document.querySelectorAll(".swatches").forEach(function (group) {
     group.addEventListener("click", function (e) {
       var sw = e.target.closest(".sw");
       if (!sw) return;
+
+      /* Deselect all, mark selected */
       group.querySelectorAll(".sw").forEach(function (s) {
         s.style.outline = "";
         s.style.outlineOffset = "";
+        s.setAttribute("aria-pressed", "false");
       });
       sw.style.outline = "1.5px solid var(--text)";
       sw.style.outlineOffset = "2px";
+      sw.setAttribute("aria-pressed", "true");
+
+      /* Update colour label */
+      var label = group.nextElementSibling;
+      if (label && label.classList.contains("swatch-label")) {
+        label.textContent = "Colour: " + (sw.getAttribute("title") || sw.dataset.color);
+      }
+
+      /* Tint overlay on card product image */
+      var card = group.closest(".card");
+      if (card) {
+        var overlay = card.querySelector(".ph__swatch-overlay");
+        if (overlay) {
+          var hex = swatchColorMap[sw.dataset.color];
+          if (hex) {
+            overlay.style.backgroundColor = hex;
+            overlay.classList.add("is-active");
+          }
+        }
+      }
+    });
+
+    /* Keyboard support for swatch dots */
+    group.querySelectorAll(".sw").forEach(function (sw) {
+      sw.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sw.click(); }
+      });
     });
   });
 
@@ -203,10 +301,7 @@
     waitlistForm.addEventListener("submit", function (e) {
       e.preventDefault();
       var email = waitlistForm.querySelector("#email");
-      if (!email.value || !email.checkValidity()) {
-        email.focus();
-        return;
-      }
+      if (!email.value || !email.checkValidity()) { email.focus(); return; }
       var consent = waitlistForm.querySelector("#consent");
       var consentLabel = consent ? consent.closest(".consent") : null;
       if (consent && !consent.checked) {
@@ -217,9 +312,9 @@
         consent.focus();
         return;
       }
-      waitlistForm.querySelectorAll("input, select, button").forEach(function (el) {
-        if (el.type !== "submit") el.value = el.type === "checkbox" ? el.value : "";
+      waitlistForm.querySelectorAll("input, select").forEach(function (el) {
         if (el.type === "checkbox") el.checked = false;
+        else el.value = "";
       });
       if (waitlistSuccess) waitlistSuccess.hidden = false;
     });
@@ -264,31 +359,37 @@
 
   /* ---------- Countdown to launch ---------- */
   var countdown = document.getElementById("countdown");
+  var countdownLive = document.getElementById("countdownLive");
+  var countdownCaption = document.querySelector(".countdown__caption");
   if (countdown) {
     var target = new Date(countdown.getAttribute("data-launch")).getTime();
     var fields = {
-      days: countdown.querySelector('[data-cd="days"]'),
+      days:  countdown.querySelector('[data-cd="days"]'),
       hours: countdown.querySelector('[data-cd="hours"]'),
-      mins: countdown.querySelector('[data-cd="mins"]'),
-      secs: countdown.querySelector('[data-cd="secs"]')
+      mins:  countdown.querySelector('[data-cd="mins"]'),
+      secs:  countdown.querySelector('[data-cd="secs"]')
     };
     var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    var timer;
     var tick = function () {
       var diff = target - Date.now();
       if (diff <= 0) {
         fields.days.textContent = fields.hours.textContent =
           fields.mins.textContent = fields.secs.textContent = "00";
+        countdown.classList.add("countdown--live");
+        if (countdownLive) countdownLive.classList.add("is-visible");
+        if (countdownCaption) countdownCaption.hidden = true;
         clearInterval(timer);
         return;
       }
       var s = Math.floor(diff / 1000);
-      fields.days.textContent = pad(Math.floor(s / 86400));
+      fields.days.textContent  = pad(Math.floor(s / 86400));
       fields.hours.textContent = pad(Math.floor((s % 86400) / 3600));
-      fields.mins.textContent = pad(Math.floor((s % 3600) / 60));
-      fields.secs.textContent = pad(s % 60);
+      fields.mins.textContent  = pad(Math.floor((s % 3600) / 60));
+      fields.secs.textContent  = pad(s % 60);
     };
     tick();
-    var timer = setInterval(tick, 1000);
+    timer = setInterval(tick, 1000);
   }
 
   /* ---------- Active nav link on scroll ---------- */

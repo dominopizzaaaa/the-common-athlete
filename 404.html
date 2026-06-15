@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found | The Common Athlete</title>
+  <meta name="description" content="The page you're looking for has moved or doesn't exist. Head back to The Common Athlete." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="nav__inner container">
+      <a href="index.html" class="nav__logo">THE COMMON ATHLETE</a>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="index.html#collection">Shop</a>
+        <a href="index.html#about">About</a>
+        <a href="blog/index.html">Journal</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <a href="index.html#waitlist" class="btn btn--solid" style="font-size:0.85rem;padding:8px 16px;">Join waitlist</a>
+    </div>
+  </header>
+
+  <main class="section" id="main-content">
+    <div class="container">
+      <div class="error-page">
+        <span class="eyebrow">404</span>
+        <h1>Page not found.</h1>
+        <p>The page you're looking for has moved, been renamed, or doesn't exist. Head back and keep moving.</p>
+        <div class="error-page__actions">
+          <a href="index.html" class="btn btn--solid">Back to home</a>
+          <a href="blog/index.html" class="btn btn--outline">Visit the Journal</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__base">
+      <p>© <span id="year"></span> The Common Athlete. All rights reserved.</p>
+      <nav class="footer__legal" aria-label="Legal">
+        <a href="index.html">Home</a>
+        <a href="blog/index.html">Journal</a>
+        <a href="privacy.html">Privacy Notice</a>
+        <a href="shipping-returns.html">Shipping &amp; Returns</a>
+      </nav>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

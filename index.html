@@ -30,10 +30,13 @@
   <meta name="twitter:description" content="Minimal, breathable, affordable activewear made in Singapore for gym, run, Pilates, and real life." />
   <meta name="twitter:image" content="https://dominopizzaaaa.github.io/the-common-athlete/images/og-image.png" />
 
-  <!-- Fonts: Space Grotesk for headings, Inter for body -->
+  <!-- Fonts: Space Grotesk for headings, Inter for body (includes 300 weight for lighter subtitles) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Preload above-fold hero image -->
+  <link rel="preload" as="image" href="images/hero.svg" />
 
   <link rel="stylesheet" href="css/styles.css" />
 
@@ -119,16 +122,18 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
   <!-- ============ ANNOUNCEMENT BAR ============ -->
-  <div class="announce">
+  <div class="announce" id="announce">
     <p>The first drop is coming soon — join the waitlist for early access &amp; first-drop pricing.</p>
+    <button class="announce__close" id="announceClose" aria-label="Close announcement">&times;</button>
   </div>
 
   <!-- ============ NAVIGATION ============ -->
   <header class="nav" id="nav">
     <div class="nav__inner container">
-      <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu" aria-haspopup="true">
         <span></span><span></span><span></span>
       </button>
 
@@ -163,7 +168,8 @@
     </div>
   </header>
 
-  <main id="top">
+  <main id="top" tabindex="-1">
+    <span id="main-content"></span>
 
     <!-- ============ HERO ============ -->
     <section class="hero">
@@ -182,7 +188,7 @@
         <div class="hero__visual">
           <!-- Editorial placeholder; swap for a photo later -->
           <div class="ph ph--hero">
-            <img src="images/hero.svg" alt="A model wearing the matching Everyday Set" />
+            <img src="images/hero.svg" alt="Model wearing The Common Athlete Everyday Set — longline crop and high-waisted biker shorts in oat" fetchpriority="high" />
           </div>
         </div>
       </div>
@@ -209,20 +215,24 @@
         <div class="grid grid--products" id="productGrid">
           <!-- Product 1 -->
           <article class="card" data-name="Longline Active Crop" data-price="32.90" data-img="images/product-crop.svg">
-            <div class="ph ph--card"><img src="images/product-crop.svg" alt="Longline Active Crop" loading="lazy" /></div>
+            <div class="ph ph--card">
+              <img src="images/product-crop.svg" alt="Longline Active Crop in espresso — padded crop with removable cups" loading="lazy" />
+              <div class="ph__swatch-overlay" aria-hidden="true"></div>
+            </div>
             <div class="card__body">
               <div class="card__top">
                 <h3 class="card__name">Longline Active Crop</h3>
                 <span class="card__price">S$32.90</span>
               </div>
               <p class="card__desc">Padded longline crop with removable cups. Low-to-medium support that wears as easily as a top.</p>
-              <ul class="swatches" aria-label="Available colours">
-                <li class="sw sw--black" title="Black"></li>
-                <li class="sw sw--espresso" title="Espresso"></li>
-                <li class="sw sw--oat" title="Oat"></li>
-                <li class="sw sw--slate" title="Slate Grey"></li>
-                <li class="sw sw--white" title="White"></li>
+              <ul class="swatches" aria-label="Select colour">
+                <li class="sw sw--black" title="Black" data-color="black" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--espresso" title="Espresso" data-color="espresso" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--oat" title="Oat" data-color="oat" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--slate" title="Slate Grey" data-color="slate" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--white" title="White" data-color="white" role="button" tabindex="0" aria-pressed="false"></li>
               </ul>
+              <p class="swatch-label" aria-live="polite"></p>
               <div class="sizes" role="group" aria-label="Select size">
                 <button type="button" class="size">XS</button>
                 <button type="button" class="size">S</button>
@@ -236,20 +246,24 @@
 
           <!-- Product 2 -->
           <article class="card" data-name="Biker Shorts with Pockets" data-price="36.90" data-img="images/product-shorts.svg">
-            <div class="ph ph--card"><img src="images/product-shorts.svg" alt="Biker Shorts with Pockets" loading="lazy" /></div>
+            <div class="ph ph--card">
+              <img src="images/product-shorts.svg" alt="Biker Shorts with Pockets in slate grey — high-waisted with side pockets" loading="lazy" />
+              <div class="ph__swatch-overlay" aria-hidden="true"></div>
+            </div>
             <div class="card__body">
               <div class="card__top">
                 <h3 class="card__name">Biker Shorts with Pockets</h3>
                 <span class="card__price">S$36.90</span>
               </div>
               <p class="card__desc">High-waisted, squat-proof shorts with sleek side pockets for your phone and keys.</p>
-              <ul class="swatches" aria-label="Available colours">
-                <li class="sw sw--black" title="Black"></li>
-                <li class="sw sw--espresso" title="Espresso"></li>
-                <li class="sw sw--oat" title="Oat"></li>
-                <li class="sw sw--slate" title="Slate Grey"></li>
-                <li class="sw sw--white" title="White"></li>
+              <ul class="swatches" aria-label="Select colour">
+                <li class="sw sw--black" title="Black" data-color="black" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--espresso" title="Espresso" data-color="espresso" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--oat" title="Oat" data-color="oat" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--slate" title="Slate Grey" data-color="slate" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--white" title="White" data-color="white" role="button" tabindex="0" aria-pressed="false"></li>
               </ul>
+              <p class="swatch-label" aria-live="polite"></p>
               <div class="sizes" role="group" aria-label="Select size">
                 <button type="button" class="size">XS</button>
                 <button type="button" class="size">S</button>
@@ -263,20 +277,24 @@
 
           <!-- Product 3 -->
           <article class="card" data-name="Oversized Cover Tee" data-price="29.90" data-img="images/product-tee.svg">
-            <div class="ph ph--card"><img src="images/product-tee.svg" alt="Oversized Cover Tee" loading="lazy" /></div>
+            <div class="ph ph--card">
+              <img src="images/product-tee.svg" alt="Oversized Cover Tee in oat — relaxed fit for layering over your set" loading="lazy" />
+              <div class="ph__swatch-overlay" aria-hidden="true"></div>
+            </div>
             <div class="card__body">
               <div class="card__top">
                 <h3 class="card__name">Oversized Cover Tee</h3>
                 <span class="card__price">S$29.90</span>
               </div>
               <p class="card__desc">A relaxed, unisex-friendly tee to throw over your set. Gym pump cover meets everyday layer.</p>
-              <ul class="swatches" aria-label="Available colours">
-                <li class="sw sw--black" title="Black"></li>
-                <li class="sw sw--espresso" title="Espresso"></li>
-                <li class="sw sw--oat" title="Oat"></li>
-                <li class="sw sw--slate" title="Slate Grey"></li>
-                <li class="sw sw--white" title="White"></li>
+              <ul class="swatches" aria-label="Select colour">
+                <li class="sw sw--black" title="Black" data-color="black" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--espresso" title="Espresso" data-color="espresso" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--oat" title="Oat" data-color="oat" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--slate" title="Slate Grey" data-color="slate" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--white" title="White" data-color="white" role="button" tabindex="0" aria-pressed="false"></li>
               </ul>
+              <p class="swatch-label" aria-live="polite"></p>
               <div class="sizes" role="group" aria-label="Select size">
                 <button type="button" class="size">XS</button>
                 <button type="button" class="size">S</button>
@@ -290,18 +308,22 @@
 
           <!-- Product 4 -->
           <article class="card" data-name="Everyday Crew Socks" data-price="8.90" data-img="images/product-socks.svg">
-            <div class="ph ph--card"><img src="images/product-socks.svg" alt="Everyday Crew Socks" loading="lazy" /></div>
+            <div class="ph ph--card">
+              <img src="images/product-socks.svg" alt="Everyday Crew Socks in white — minimal-logo crew length for training and daily wear" loading="lazy" />
+              <div class="ph__swatch-overlay" aria-hidden="true"></div>
+            </div>
             <div class="card__body">
               <div class="card__top">
                 <h3 class="card__name">Everyday Crew Socks</h3>
                 <span class="card__price">S$8.90</span>
               </div>
               <p class="card__desc">Minimal-logo crew socks for training and daily wear. The easy bundle add-on.</p>
-              <ul class="swatches" aria-label="Available colours">
-                <li class="sw sw--black" title="Black"></li>
-                <li class="sw sw--oat" title="Oat"></li>
-                <li class="sw sw--white" title="White"></li>
+              <ul class="swatches" aria-label="Select colour">
+                <li class="sw sw--black" title="Black" data-color="black" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--oat" title="Oat" data-color="oat" role="button" tabindex="0" aria-pressed="false"></li>
+                <li class="sw sw--white" title="White" data-color="white" role="button" tabindex="0" aria-pressed="false"></li>
               </ul>
+              <p class="swatch-label" aria-live="polite"></p>
               <div class="sizes" role="group" aria-label="Select size">
                 <button type="button" class="size">One size</button>
               </div>
@@ -508,27 +530,27 @@
 
         <div class="faq">
           <details class="faq__item">
-            <summary>When does The Common Athlete launch?</summary>
+            <summary aria-expanded="false">When does The Common Athlete launch?</summary>
             <p>We're in final sample testing now. Join the waitlist for the launch date, early access, and first-drop pricing.</p>
           </details>
           <details class="faq__item">
-            <summary>Is the activewear made for Singapore weather?</summary>
+            <summary aria-expanded="false">Is the activewear made for Singapore weather?</summary>
             <p>Yes — every piece is designed to be breathable, sweat-friendly, and quick to move in, whether you're training indoors or out in the heat.</p>
           </details>
           <details class="faq__item">
-            <summary>Do the bras have removable padding?</summary>
+            <summary aria-expanded="false">Do the bras have removable padding?</summary>
             <p>The Longline Active Crop comes with removable cups and offers low-to-medium support, so you can wear it your way.</p>
           </details>
           <details class="faq__item">
-            <summary>Where do you ship?</summary>
+            <summary aria-expanded="false">Where do you ship?</summary>
             <p>We'll launch with delivery across Singapore, with more regions to follow. Waitlist members hear about shipping first.</p>
           </details>
           <details class="faq__item">
-            <summary>What's your return policy?</summary>
+            <summary aria-expanded="false">What's your return policy?</summary>
             <p>Unworn items with tags can be returned within 14 days of delivery. Full details will be shared at launch.</p>
           </details>
           <details class="faq__item">
-            <summary>How do I get help choosing a size?</summary>
+            <summary aria-expanded="false">How do I get help choosing a size?</summary>
             <p>Message us on WhatsApp at +65 9779 9779 — we're happy to help you find your everyday fit.</p>
           </details>
         </div>
@@ -550,6 +572,7 @@
             <div class="countdown__unit"><span class="countdown__num" data-cd="mins">00</span><span class="countdown__label">Min</span></div>
             <div class="countdown__unit"><span class="countdown__num" data-cd="secs">00</span><span class="countdown__label">Sec</span></div>
           </div>
+          <p id="countdownLive" aria-live="assertive">We're live — shop the first drop now!</p>
           <p class="countdown__caption muted">Counting down to the first drop · 15 August 2026</p>
         </div>
 
@@ -634,7 +657,7 @@
 
       <nav class="footer__col" aria-label="Footer brand">
         <h4>Brand</h4>
-        <a href="#about">About</a>
+        <a href="about.html">About</a>
         <a href="#faq">FAQ</a>
         <a href="blog/index.html">Journal</a>
         <a href="https://wa.me/6597799779" target="_blank" rel="noopener">WhatsApp</a>
@@ -680,7 +703,8 @@
     <div class="drawer__foot">
       <div class="drawer__total"><span>Subtotal</span><span id="drawerTotal">S$0.00</span></div>
       <button class="btn btn--solid btn--block" id="checkoutBtn" disabled>Checkout</button>
-      <p class="drawer__note">This is a launch preview — checkout opens at the first drop.</p>
+      <a href="#waitlist" class="btn btn--outline btn--block drawer__waitlist-cta" id="drawerWaitlistCta">Reserve your size — join waitlist</a>
+      <p class="drawer__note">Checkout opens at launch · 15 Aug 2026</p>
     </div>
   </aside>
 
