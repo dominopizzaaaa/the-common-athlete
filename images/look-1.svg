@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="t">
+  <title id="t">Lookbook — in the set</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8c8d8f"/><stop offset="1" stop-color="#65676a"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.7" cy="0.1" r="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/><stop offset="0.65" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#sheen)"/>
+  <path d="M 354 150 C 354 96 446 96 446 150 C 450 188 444 250 428 272 L 420 250 C 426 200 418 172 400 170 C 382 172 374 200 380 250 L 372 272 C 356 250 350 188 354 150 Z" fill="#3a3b3d"/>
+  <circle cx="400" cy="160" r="44" fill="#3a3b3d"/>
+  <rect x="384" y="198" width="32" height="26" fill="#3a3b3d"/>
+  <path d="M 350 234 C 364 218 436 218 450 234 L 470 258 C 478 322 472 460 462 560 L 338 560 C 328 460 322 322 330 258 Z" fill="#3a3b3d"/>
+  <path d="M 378 556 L 374 904" stroke="#3a3b3d" stroke-width="46" stroke-linecap="round" fill="none"/>
+  <path d="M 422 556 L 426 904" stroke="#3a3b3d" stroke-width="46" stroke-linecap="round" fill="none"/>
+  <path d="M 356 248 C 326 304 312 376 308 452" stroke="#3a3b3d" stroke-width="30" stroke-linecap="round" fill="none"/>
+  <path d="M 444 248 C 474 304 488 376 492 452" stroke="#3a3b3d" stroke-width="30" stroke-linecap="round" fill="none"/>
+  <path d="M 330 462 L 470 462 L 468 556 L 462 636 L 416 636 L 408 540 L 400 552 L 392 540 L 384 636 L 338 636 L 332 556 Z" fill="#f2efe9"/>
+  <path d="M 340 252 L 364 242 C 384 256 416 256 436 242 L 460 252 C 466 300 466 360 460 404 L 340 404 C 334 360 334 300 340 252 Z" fill="#f2efe9"/>
+  <text x="56" y="950" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600" letter-spacing="3" fill="#f6f2ea" opacity="0.9">IN THE SET</text>
+</svg>

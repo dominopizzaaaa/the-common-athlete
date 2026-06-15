@@ -11,8 +11,13 @@ A complete, single-page brand launch site built with **plain HTML, CSS, and Java
 no build step, no dependencies. Just open it and run.
 
 Sections: sticky nav with mobile menu · hero · brand promise strip · first-drop
-product grid · the Everyday Set highlight · lifestyle tiles · about · fit & function
-· waitlist form · pre-launch community notes · footer · and a working bag drawer.
+product grid · campaign banner · the Everyday Set highlight · lifestyle tiles ·
+lookbook gallery · about · fit & function · size guide with measurement chart ·
+FAQ · waitlist form · pre-launch community notes · footer · a working bag drawer
+· and a floating WhatsApp contact button.
+
+All imagery is custom-drawn **SVG artwork** (in `images/`) featuring the brand
+name on the apparel — sharp at any size and easy to swap for real photography.
 
 ## File structure
 
@@ -23,8 +28,16 @@ the-common-athlete/
 │   └── styles.css    # Design tokens, layout, responsive styles
 ├── js/
 │   └── main.js       # Mobile menu, bag drawer, forms, scroll reveal
+├── images/           # Custom SVG artwork (products, looks, banner, etc.)
 └── README.md
 ```
+
+## Contact & integrations
+
+- **WhatsApp** — the floating button and footer link point to `+65 9779 9779`
+  (`https://wa.me/6597799779`). Update the number in `index.html` if it changes.
+- **Size guide** — sample measurements live in the `#size-guide` table in
+  `index.html`; the "how to measure" diagram is `images/measure.svg`.
 
 ## Run it locally
 

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="t">
+  <title id="t">Biker Shorts with Pockets — The Common Athlete</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8c8d8f"/>
+      <stop offset="1" stop-color="#65676a"/>
+    </linearGradient>
+    <linearGradient id="cloth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3b3d"/>
+      <stop offset="1" stop-color="#2b2c2e"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.78" cy="0.12" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.18"/>
+      <stop offset="0.6" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#sheen)"/>
+
+  <!-- high-waisted biker shorts -->
+  <path d="M 285 322 L 515 322 C 524 322 530 330 529 339 L 542 470 L 534 700
+           C 534 710 526 716 516 716 L 432 716 C 423 716 416 710 415 700
+           L 405 520 L 400 536 L 395 520 L 385 700 C 384 710 377 716 368 716
+           L 284 716 C 274 716 266 710 266 700 L 258 470 L 271 339
+           C 270 330 276 322 285 322 Z"
+        fill="url(#cloth)" stroke="#1f2021" stroke-width="2"/>
+
+  <!-- waistband -->
+  <path d="M 271 339 C 270 330 276 322 285 322 L 515 322 C 524 322 530 330 529 339 L 525 384 L 275 384 Z"
+        fill="#434446"/>
+  <line x1="276" y1="384" x2="524" y2="384" stroke="#1f2021" stroke-width="2" opacity="0.8"/>
+
+  <!-- side pocket + seams -->
+  <path d="M 478 430 C 512 446 520 486 512 520" fill="none" stroke="#55565a" stroke-width="2.5" opacity="0.9"/>
+  <path d="M 400 392 L 400 514" fill="none" stroke="#55565a" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- wordmark on waistband -->
+  <text x="400" y="362" text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+        font-size="16" font-weight="700" letter-spacing="3" fill="#e7e7e8">THE COMMON ATHLETE</text>
+
+  <text x="56" y="80" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700"
+        letter-spacing="3" fill="#ffffff" opacity="0.9">02</text>
+  <text x="56" y="950" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600"
+        letter-spacing="2.5" fill="#ffffff" opacity="0.9">BIKER SHORTS · POCKETS</text>
+</svg>

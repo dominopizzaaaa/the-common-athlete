@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="t">
+  <title id="t">Longline Active Crop — The Common Athlete</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6b5340"/>
+      <stop offset="1" stop-color="#463528"/>
+    </linearGradient>
+    <linearGradient id="cloth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f6f2ea"/>
+      <stop offset="1" stop-color="#e7ddcd"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.78" cy="0.12" r="0.9">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="0.6" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#sheen)"/>
+
+  <!-- longline crop -->
+  <path d="M 270 360 C 270 340 285 326 312 322 L 360 332 C 380 344 420 344 440 332
+           L 488 322 C 515 326 530 340 530 360 C 545 388 556 408 560 440
+           C 545 452 528 470 524 500 L 528 672 C 528 688 518 698 502 698
+           L 298 698 C 282 698 272 688 272 672 L 276 500
+           C 272 470 255 452 240 440 C 244 408 255 388 270 360 Z"
+        fill="url(#cloth)" stroke="#d8cbb8" stroke-width="2"/>
+  <!-- neckline + seams -->
+  <path d="M 360 332 C 380 344 420 344 440 332" fill="none" stroke="#cdbfa6" stroke-width="2" opacity="0.7"/>
+  <path d="M 400 348 L 400 690" fill="none" stroke="#d8cbb8" stroke-width="1.5" opacity="0.5"/>
+  <line x1="292" y1="636" x2="508" y2="636" stroke="#cdbfa6" stroke-width="2" opacity="0.6"/>
+
+  <!-- wordmark printed on chest -->
+  <text x="400" y="470" text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+        font-size="20" font-weight="700" letter-spacing="3.5" fill="#5B4636">THE COMMON</text>
+  <text x="400" y="496" text-anchor="middle" font-family="Helvetica, Arial, sans-serif"
+        font-size="20" font-weight="700" letter-spacing="3.5" fill="#5B4636">ATHLETE</text>
+
+  <!-- editorial captions -->
+  <text x="56" y="80" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700"
+        letter-spacing="3" fill="#f6f2ea" opacity="0.85">01</text>
+  <text x="56" y="950" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="600"
+        letter-spacing="2.5" fill="#f6f2ea" opacity="0.85">LONGLINE ACTIVE CROP</text>
+</svg>

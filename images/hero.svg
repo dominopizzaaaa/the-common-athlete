@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="t">
+  <title id="t">A model wearing The Everyday Set by The Common Athlete</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6dccb"/>
+      <stop offset="1" stop-color="#cdbfa6"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="0.7" cy="0.1" r="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.30"/>
+      <stop offset="0.65" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#sheen)"/>
+
+  <!-- figure wearing the set -->
+  <path d="M 354 150 C 354 96 446 96 446 150 C 450 188 444 250 428 272 L 420 250 C 426 200 418 172 400 170 C 382 172 374 200 380 250 L 372 272 C 356 250 350 188 354 150 Z" fill="#5B4636"/>
+  <circle cx="400" cy="160" r="44" fill="#5B4636"/>
+  <rect x="384" y="198" width="32" height="26" fill="#5B4636"/>
+  <path d="M 350 234 C 364 218 436 218 450 234 L 470 258 C 478 322 472 460 462 560 L 338 560 C 328 460 322 322 330 258 Z" fill="#5B4636"/>
+  <path d="M 378 556 L 374 904" stroke="#5B4636" stroke-width="46" stroke-linecap="round" fill="none"/>
+  <path d="M 422 556 L 426 904" stroke="#5B4636" stroke-width="46" stroke-linecap="round" fill="none"/>
+  <ellipse cx="372" cy="912" rx="30" ry="13" fill="#5B4636"/>
+  <ellipse cx="428" cy="912" rx="30" ry="13" fill="#5B4636"/>
+  <path d="M 356 248 C 326 304 312 376 308 452" stroke="#5B4636" stroke-width="30" stroke-linecap="round" fill="none"/>
+  <path d="M 444 248 C 474 304 488 376 492 452" stroke="#5B4636" stroke-width="30" stroke-linecap="round" fill="none"/>
+  <!-- the set -->
+  <path d="M 330 462 L 470 462 L 468 556 L 462 636 L 416 636 L 408 540 L 400 552 L 392 540 L 384 636 L 338 636 L 332 556 Z" fill="#f6f2ea"/>
+  <path d="M 340 252 L 364 242 C 384 256 416 256 436 242 L 460 252 C 466 300 466 360 460 404 L 340 404 C 334 360 334 300 340 252 Z" fill="#f6f2ea"/>
+  <text x="400" y="320" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5" fill="#5B4636">THE COMMON</text>
+  <text x="400" y="338" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.5" fill="#5B4636">ATHLETE</text>
+
+  <!-- caption -->
+  <text x="56" y="950" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="600"
+        letter-spacing="3" fill="#5B4636" opacity="0.85">THE EVERYDAY SET</text>
+</svg>
