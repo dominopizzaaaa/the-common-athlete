@@ -189,10 +189,19 @@ h1, h2, h3, h4 {
   height: 64px;
 }
 .nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-size: 0.95rem;
   letter-spacing: 0.12em;
+}
+.nav__logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 .nav__links { display: none; gap: 28px; }
 .nav__links a {
@@ -570,11 +579,20 @@ fieldset.field { border: none; padding: 0; }
   padding-bottom: 40px;
 }
 .footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   letter-spacing: 0.12em;
   font-size: 1rem;
   color: var(--bg);
+}
+.footer__logo-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 .footer__line { color: rgba(248,246,241,.6); font-size: 0.88rem; margin-top: 10px; max-width: 320px; }
 .footer__col h4 {
