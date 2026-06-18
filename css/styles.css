@@ -1221,6 +1221,36 @@ fieldset.field { border: none; padding: 0; }
 @media (min-width: 600px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 900px) { .blog-grid { grid-template-columns: repeat(3, 1fr); } }
 
+/* ==========================================================================
+   Page transitions (fade + soft rise between tabs)
+   The enter animation runs from pure CSS on every load (so it works with or
+   without JS and never leaves content blank). JS adds .pt-leave before a
+   same-site navigation for the exit fade. The Home intro page opts out of the
+   enter animation via .pt-no-enter (the intro owns that entrance).
+   ========================================================================== */
+main {
+  animation: ptEnter .42s cubic-bezier(.2,.7,.2,1) both;
+}
+.pt-no-enter main { animation: none; }
+
+@keyframes ptEnter {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Leaving: fade + drop the whole page out, then navigation happens */
+body.pt-leave {
+  animation: ptLeave .26s cubic-bezier(.4,0,.6,1) both;
+}
+@keyframes ptLeave {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(-12px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main, body.pt-leave { animation: none !important; }
+}
+
 /* ---------- Reveal on scroll ---------- */
 .reveal {
   opacity: 0;

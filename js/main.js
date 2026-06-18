@@ -71,6 +71,47 @@
     });
   })();
 
+  /* ---------- Page transitions (fade + soft rise between tabs) ----------
+     Plays an exit fade before same-site navigations and an enter animation on
+     load. Degrades to plain navigation for new-tab/modifier clicks, external
+     links, downloads, hash jumps, reduced motion, or when JS is unavailable. */
+  (function pageTransitions() {
+    var reduced = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+
+    function isModified(e) {
+      return e.defaultPrevented || e.button !== 0 ||
+        e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
+    }
+
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("a");
+      if (!a) return;
+      if (isModified(e)) return;
+      if (a.target && a.target !== "_self") return;       // new tab/window
+      if (a.hasAttribute("download")) return;
+
+      var href = a.getAttribute("href");
+      if (!href || href.charAt(0) === "#") return;          // in-page anchor
+      if (a.origin !== location.origin) return;             // external link
+      // same page (ignoring hash)? let the browser handle it
+      if (a.pathname === location.pathname && a.search === location.search) return;
+
+      e.preventDefault();
+      document.body.classList.add("pt-leave");
+      var done = false;
+      var nav = function () { if (!done) { done = true; window.location.href = a.href; } };
+      document.body.addEventListener("animationend", nav, { once: true });
+      setTimeout(nav, 340); // fallback if animationend doesn't fire
+    });
+
+    // Restore from bfcache (back/forward) without a stuck faded-out page.
+    window.addEventListener("pageshow", function (e) {
+      if (e.persisted) document.body.classList.remove("pt-leave");
+    });
+  })();
+
   /* ---------- Current year in footer ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();

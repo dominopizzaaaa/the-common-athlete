@@ -51,7 +51,9 @@
         var seen = sessionStorage.getItem("tca_intro_seen") === "1";
         if (!reduced && !seen) {
           var d = document.documentElement;
-          d.className += " intro-pending";
+          // intro-pending hides nav/hero pre-paint; pt-no-enter stops the
+          // generic page-enter animation from running behind the intro.
+          d.className += " intro-pending pt-no-enter";
           setTimeout(function () { d.classList.remove("intro-pending"); }, 6000);
         }
       } catch (e) {}
