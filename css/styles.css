@@ -246,6 +246,12 @@ h1, h2, h3, h4 {
   justify-content: center;
   padding: 0 5px;
 }
+.nav__bag-count.is-bumped { animation: bagBump .4s var(--ease); }
+@keyframes bagBump {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.45); background: var(--accent); }
+  100% { transform: scale(1); }
+}
 
 /* Burger */
 .nav__burger {
@@ -677,6 +683,8 @@ fieldset.field { border: none; padding: 0; }
 .drawer__close { background: none; border: none; font-size: 1.6rem; line-height: 1; color: var(--text); }
 .drawer__body { flex: 1; overflow-y: auto; padding: 16px var(--pad); }
 .drawer__empty { color: var(--muted); font-size: 0.92rem; text-align: center; margin-top: 40px; }
+.drawer__empty p { margin-bottom: 18px; }
+.drawer__empty .btn { max-width: 240px; margin: 0 auto; }
 
 .bag-item {
   display: flex;
@@ -786,6 +794,30 @@ fieldset.field { border: none; padding: 0; }
 @media (min-width: 760px) {
   .qv__dialog { grid-template-columns: 1.05fr 1fr; max-height: 86vh; }
   .qv__media { border-radius: var(--radius) 0 0 var(--radius); aspect-ratio: auto; }
+}
+
+/* Wishlist heart (cards + quick-view) */
+.wish {
+  position: absolute;
+  top: 12px; right: 12px;
+  z-index: 3;
+  width: 38px; height: 38px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(248,246,241,.9);
+  color: var(--muted);
+  transition: transform .2s var(--ease), color .2s, background-color .2s;
+}
+.wish svg { fill: none; stroke: currentColor; stroke-width: 1.8; }
+.wish:hover { transform: scale(1.1); color: var(--accent); background: #fff; }
+.wish.is-saved { color: #c0392b; }
+.wish.is-saved svg { fill: currentColor; stroke: currentColor; }
+.wish.is-saved { animation: wishPop .35s var(--ease); }
+@keyframes wishPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3); }
+  100% { transform: scale(1); }
 }
 
 /* "Quick view" button overlaid on product card images */
@@ -957,6 +989,56 @@ fieldset.field { border: none; padding: 0; }
 /* ---------- Footer contact line ---------- */
 .footer__contact { font-size: 0.85rem; color: rgba(248,246,241,.6); margin-top: 16px; }
 .footer__contact a { color: var(--oat); text-decoration: underline; }
+
+/* ---------- Add-to-bag toast ---------- */
+.toast {
+  position: fixed;
+  top: 78px;
+  right: 16px;
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(320px, calc(100vw - 32px));
+  padding: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 36px rgba(17,17,17,.16);
+  opacity: 0;
+  transform: translateX(24px);
+  pointer-events: none;
+  transition: opacity .3s var(--ease), transform .3s var(--ease);
+}
+.toast.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.toast__thumb {
+  width: 46px; height: 46px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background: #fff;
+  border: 1px solid var(--border);
+}
+.toast__thumb::after { content: none; }
+.toast__thumb img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
+.toast__text { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; }
+.toast__text strong { font-size: 0.85rem; }
+.toast__text span {
+  font-size: 0.8rem; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.toast__view {
+  margin-left: auto;
+  flex-shrink: 0;
+  align-self: center;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+.toast__view:hover { background: var(--accent); }
 
 /* ---------- Floating WhatsApp button ---------- */
 .wa-float {
@@ -1164,6 +1246,20 @@ fieldset.field { border: none; padding: 0; }
   .waitlist__form { grid-template-columns: 1fr 1fr; }
   .community__row { grid-template-columns: repeat(3, 1fr); }
   .footer__base { flex-direction: row; justify-content: space-between; }
+}
+
+/* Touch devices have no hover — keep the quick-view button reachable, and
+   anchor the toast to the bottom so it clears the nav. */
+@media (hover: none) {
+  .qv__trigger { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+}
+@media (max-width: 599px) {
+  .toast {
+    top: auto;
+    bottom: 92px;            /* sit above the floating WhatsApp button */
+    right: 16px; left: 16px;
+    width: auto;
+  }
 }
 
 @media (min-width: 900px) {

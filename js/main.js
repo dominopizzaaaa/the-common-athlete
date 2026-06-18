@@ -195,7 +195,13 @@
 
     if (!drawerBody) return;
     if (bag.length === 0) {
-      drawerBody.innerHTML = '<p class="drawer__empty">Your bag is empty.</p>';
+      // Path to the women's shop differs by directory depth.
+      var shopHref = /\/shop\//.test(location.pathname) ? "women.html" : "shop/women.html";
+      drawerBody.innerHTML =
+        '<div class="drawer__empty">' +
+          '<p>Your bag is empty.</p>' +
+          '<a href="' + shopHref + '" class="btn btn--outline btn--block">Shop the collection</a>' +
+        '</div>';
       return;
     }
 
@@ -225,7 +231,44 @@
     if (existing) { existing.qty += 1; }
     else { bag.push({ name: name, price: price, img: img, size: size, qty: 1 }); }
     renderBag();
-    openDrawer();
+    bumpBagCount();
+    showToast(name, img);
+  }
+
+  /* ---------- Add-to-bag toast ---------- */
+  var toastEl, toastTimer;
+  function showToast(name, img) {
+    if (!toastEl) {
+      toastEl = document.createElement("div");
+      toastEl.className = "toast";
+      toastEl.setAttribute("role", "status");
+      toastEl.setAttribute("aria-live", "polite");
+      document.body.appendChild(toastEl);
+    }
+    toastEl.innerHTML =
+      '<div class="toast__thumb ph"><img src="' + img + '" alt="" /></div>' +
+      '<div class="toast__text"><strong>Added to bag</strong><span>' + name + '</span></div>' +
+      '<button class="toast__view" type="button">View bag</button>';
+    toastEl.querySelector(".toast__view").addEventListener("click", function () {
+      hideToast();
+      openDrawer();
+    });
+    // force reflow so the transition re-triggers on rapid adds
+    void toastEl.offsetWidth;
+    toastEl.classList.add("is-visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, 3200);
+  }
+  function hideToast() {
+    if (toastEl) toastEl.classList.remove("is-visible");
+  }
+
+  /* ---------- Bag count bump ---------- */
+  function bumpBagCount() {
+    if (!bagCount) return;
+    bagCount.classList.remove("is-bumped");
+    void bagCount.offsetWidth;
+    bagCount.classList.add("is-bumped");
   }
 
   /* ---------- Size pill selection ---------- */
@@ -315,6 +358,64 @@
     });
   }
 
+  /* ---------- Wishlist / save (♥) ----------
+     Saves products by name in localStorage and reflects the state on every
+     heart (cards + quick-view) across the site. */
+  var WISH_KEY = "tca_wishlist";
+  function loadWish() {
+    try { return JSON.parse(localStorage.getItem(WISH_KEY)) || []; }
+    catch (e) { return []; }
+  }
+  var wishlist = loadWish();
+  function saveWish() {
+    try { localStorage.setItem(WISH_KEY, JSON.stringify(wishlist)); } catch (e) {}
+  }
+  function wishlistHas(name) { return wishlist.indexOf(name) !== -1; }
+  function wishlistToggle(name) {
+    var i = wishlist.indexOf(name);
+    if (i === -1) wishlist.push(name); else wishlist.splice(i, 1);
+    saveWish();
+    syncWishUI(name);
+    return wishlistHas(name);
+  }
+  // Keep every heart for a product in sync (cards + modal).
+  function syncWishUI(name) {
+    var saved = wishlistHas(name);
+    document.querySelectorAll('.wish[data-name="' + cssEscape(name) + '"]').forEach(function (b) {
+      b.classList.toggle("is-saved", saved);
+      b.setAttribute("aria-pressed", String(saved));
+      b.setAttribute("aria-label", (saved ? "Saved — remove " : "Save ") + name);
+    });
+  }
+  function cssEscape(s) { return (s || "").replace(/"/g, '\\"'); }
+  function makeHeart(name) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "wish";
+    b.dataset.name = name;
+    b.innerHTML =
+      '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">' +
+      '<path d="M12 21s-7.5-4.6-10-9.2C.4 8.5 2 5 5.3 5c2 0 3.3 1.1 4.2 2.4C10.4 6.1 11.7 5 13.7 5 17 5 18.6 8.5 17 11.8 14.5 16.4 12 21 12 21z"/>' +
+      '</svg>';
+    b.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      wishlistToggle(name);
+    });
+    return b;
+  }
+  // Add a heart to each product card.
+  document.querySelectorAll(".grid--products .card").forEach(function (card) {
+    var media = card.querySelector(".ph--card");
+    var name = card.dataset.name;
+    if (!media || !name) return;
+    var heart = makeHeart(name);
+    heart.classList.toggle("is-saved", wishlistHas(name));
+    heart.setAttribute("aria-pressed", String(wishlistHas(name)));
+    heart.setAttribute("aria-label", (wishlistHas(name) ? "Saved — remove " : "Save ") + name);
+    media.appendChild(heart);
+  });
+
   /* ---------- Quick-view modal ----------
      Built from whichever card is opened, so product data stays in one place
      (the cards). Adds a "Quick view" button to each card image, then mirrors
@@ -342,6 +443,19 @@
       qvName.textContent = textOf(card, ".card__name") || card.dataset.name || "";
       qvPrice.textContent = textOf(card, ".card__price");
       qvDesc.textContent = textOf(card, ".card__desc");
+
+      // Refresh the modal's heart for this product.
+      var qvMedia = qv.querySelector(".qv__media");
+      var oldHeart = qvMedia.querySelector(".wish");
+      if (oldHeart) oldHeart.remove();
+      var name = card.dataset.name;
+      if (name) {
+        var heart = makeHeart(name);
+        heart.classList.toggle("is-saved", wishlistHas(name));
+        heart.setAttribute("aria-pressed", String(wishlistHas(name)));
+        heart.setAttribute("aria-label", (wishlistHas(name) ? "Saved — remove " : "Save ") + name);
+        qvMedia.appendChild(heart);
+      }
 
       // Clone swatches (with their data-img) and wire image swap + label.
       qvSwatches.innerHTML = card.querySelector(".swatches").innerHTML;
