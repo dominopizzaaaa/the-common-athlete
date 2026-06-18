@@ -265,15 +265,7 @@
     if (e.key === "Escape") { closeDrawer(); closeMobileMenu(); }
   });
 
-  /* ---------- Swatch selection — colour overlay + label ---------- */
-  var swatchColorMap = {
-    "black":    "#1a1a1a",
-    "espresso": "#5B4636",
-    "oat":      "#D8CBB8",
-    "slate":    "#7c7e80",
-    "white":    "#f3f0ea"
-  };
-
+  /* ---------- Swatch selection — swap product photo + label ---------- */
   document.querySelectorAll(".swatches").forEach(function (group) {
     group.addEventListener("click", function (e) {
       var sw = e.target.closest(".sw");
@@ -288,23 +280,25 @@
       sw.classList.add("is-selected");
       sw.setAttribute("aria-pressed", "true");
 
+      var colour = sw.getAttribute("title") || sw.dataset.color;
+
       /* Update colour label */
       var label = group.nextElementSibling;
       if (label && label.classList.contains("swatch-label")) {
-        label.textContent = "Colour: " + (sw.getAttribute("title") || sw.dataset.color);
+        label.textContent = "Colour: " + colour;
       }
 
-      /* Tint overlay on card product image */
+      /* Swap the card's product photo to the selected colour. The chosen
+         image also becomes what gets added to the bag (data-img on the card). */
       var card = group.closest(".card");
-      if (card) {
-        var overlay = card.querySelector(".ph__swatch-overlay");
-        if (overlay) {
-          var hex = swatchColorMap[sw.dataset.color];
-          if (hex) {
-            overlay.style.backgroundColor = hex;
-            overlay.classList.add("is-active");
-          }
+      var img = sw.dataset.img;
+      if (card && img) {
+        var cardImg = card.querySelector(".ph--card img");
+        if (cardImg) {
+          cardImg.src = img;
+          cardImg.alt = card.dataset.name + " in " + colour + " — front and back";
         }
+        card.dataset.img = img;
       }
     });
 

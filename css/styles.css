@@ -331,6 +331,19 @@ h1, h2, h3, h4 {
 
 .ph--hero { aspect-ratio: 4 / 5; }
 .ph--card { aspect-ratio: 4 / 5; border-radius: 0; border: none; border-bottom: 1px solid var(--border); }
+/* Product cards now hold real front+back photos on a white studio background.
+   Show the whole (landscape) shot uncropped, on white, instead of the
+   editorial cover-crop used by the placeholder art. */
+.ph--card {
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+}
+.ph--card::after { content: none; }
+.ph--card img {
+  object-fit: contain;
+  padding: 14px;
+}
 .ph--tall { aspect-ratio: 3 / 4; }
 .ph--tile { aspect-ratio: 1 / 1; margin-bottom: 14px; }
 
@@ -433,6 +446,7 @@ h1, h2, h3, h4 {
 }
 .sw--black    { background: #1a1a1a; }
 .sw--espresso { background: #5B4636; }
+.sw--sand     { background: #C8B79E; }
 .sw--oat      { background: #D8CBB8; }
 .sw--slate    { background: #7c7e80; }
 .sw--white    { background: #f3f0ea; }
@@ -1041,20 +1055,6 @@ fieldset.field { border: none; padding: 0; }
   margin: -10px 0 14px;
   transition: color 0.2s;
 }
-
-/* ---------- Swatch colour overlay (tints product image on colour select) ---------- */
-.ph__swatch-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0;
-  mix-blend-mode: color;
-  transition: opacity 0.4s var(--ease), background-color 0.4s var(--ease);
-  border-radius: inherit;
-}
-.ph__swatch-overlay.is-active { opacity: 0.6; }
-.ph--card img { transition: filter 0.4s var(--ease); }
 
 /* ---------- Blog article enhancements ---------- */
 .article p,
