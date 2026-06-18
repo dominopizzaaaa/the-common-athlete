@@ -12,9 +12,13 @@
   (function intro() {
     var intro = document.getElementById("intro");
     var hero = document.querySelector(".hero--reveal");
+    var body = document.body;
+    var docEl = document.documentElement;
+
     var revealHero = function () {
-      document.documentElement.classList.remove("intro-pending");
-      if (hero) hero.classList.add("is-revealed");
+      docEl.classList.remove("intro-pending");
+      body.classList.add("intro-revealed");          // drops nav + announce in
+      if (hero) hero.classList.add("is-revealed");    // hero cascade + image wipe
     };
 
     var reduced = window.matchMedia &&
@@ -23,23 +27,48 @@
     try { seen = sessionStorage.getItem("tca_intro_seen") === "1"; } catch (e) { seen = false; }
 
     if (!intro || reduced || seen) {
-      if (intro) intro.parentNode.removeChild(intro);
-      revealHero();
+      if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
+      docEl.classList.remove("intro-pending");
+      if (hero) hero.classList.add("is-revealed");
       return;
     }
 
     try { sessionStorage.setItem("tca_intro_seen", "1"); } catch (e) {}
 
-    document.body.classList.add("intro-active");
+    var timers = [];
+    var finished = false;
+
+    body.classList.add("intro-active");
     intro.classList.add("is-playing");
 
-    // Total timeline ≈ 2.9s (curtains start at 2.05s + 0.85s). Reveal the hero
-    // just as the curtains open, then clean up once they've cleared.
-    setTimeout(revealHero, 2150);
-    setTimeout(function () {
-      document.body.classList.remove("intro-active");
+    // Reveal the site as the slats begin sweeping away, then remove the overlay.
+    var heroT = setTimeout(revealHero, 2750);
+    var cleanupT = setTimeout(function () {
+      finished = true;
+      body.classList.remove("intro-active");
       if (intro.parentNode) intro.parentNode.removeChild(intro);
-    }, 3050);
+    }, 4100);
+    timers.push(heroT, cleanupT);
+
+    // Skip: fast-forward straight to the revealed site.
+    function skip() {
+      if (finished) return;
+      finished = true;
+      timers.forEach(clearTimeout);
+      intro.classList.add("intro--skip");            // fades overlay out fast
+      revealHero();
+      setTimeout(function () {
+        body.classList.remove("intro-active");
+        if (intro.parentNode) intro.parentNode.removeChild(intro);
+      }, 360);
+    }
+    var skipBtn = document.getElementById("introSkip");
+    if (skipBtn) skipBtn.addEventListener("click", skip);
+    intro.addEventListener("click", function (e) {
+      // click anywhere on the backdrop (not the skip button itself) also skips
+      if (e.target === skipBtn) return;
+      skip();
+    });
   })();
 
   /* ---------- Current year in footer ---------- */

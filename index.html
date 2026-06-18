@@ -40,14 +40,20 @@
 
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- Intro guard: add intro-active before first paint so the hero doesn't
-       flash in before the curtain animation. Mirrors the checks in main.js. -->
+  <!-- Intro guard: add intro-pending before first paint so the nav/hero don't
+       flash in before the intro animation. Mirrors the checks in main.js.
+       A self-healing timeout removes it if the main script ever fails to run,
+       so content can never get stuck hidden. -->
   <script>
     (function () {
       try {
         var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         var seen = sessionStorage.getItem("tca_intro_seen") === "1";
-        if (!reduced && !seen) document.documentElement.className += " intro-pending";
+        if (!reduced && !seen) {
+          var d = document.documentElement;
+          d.className += " intro-pending";
+          setTimeout(function () { d.classList.remove("intro-pending"); }, 6000);
+        }
       } catch (e) {}
     })();
   </script>
@@ -93,13 +99,35 @@
 
   <!-- ============ INTRO REVEAL (first visit, Home only) ============ -->
   <div class="intro" id="intro" aria-hidden="true">
-    <div class="intro__panel intro__panel--left"></div>
-    <div class="intro__panel intro__panel--right"></div>
+    <!-- Diagonal slats that sweep off to reveal the site (shutter reveal) -->
+    <div class="intro__slats" aria-hidden="true">
+      <span class="intro__slat" style="--s:0"></span>
+      <span class="intro__slat" style="--s:1"></span>
+      <span class="intro__slat" style="--s:2"></span>
+      <span class="intro__slat" style="--s:3"></span>
+      <span class="intro__slat" style="--s:4"></span>
+      <span class="intro__slat" style="--s:5"></span>
+    </div>
+
+    <!-- Brand lockup: self-drawing CA monogram + kinetic wordmark -->
     <div class="intro__brand">
-      <img src="images/logo.png" alt="" class="intro__mark" width="96" height="96" />
-      <span class="intro__word">THE COMMON ATHLETE</span>
+      <div class="intro__glow" aria-hidden="true"></div>
+      <svg class="intro__logo" viewBox="0 0 120 120" width="118" height="118" aria-hidden="true" focusable="false">
+        <circle class="intro__ring" cx="60" cy="60" r="56" />
+        <!-- C -->
+        <path class="intro__stroke intro__stroke--c" d="M74 40 A26 26 0 1 0 74 80" />
+        <!-- A -->
+        <path class="intro__stroke intro__stroke--a" d="M48 82 L60 38 L72 82 M52 68 L68 68" />
+      </svg>
+      <h2 class="intro__word" aria-label="The Common Athlete">
+        <span class="intro__char" style="--c:0">T</span><span class="intro__char" style="--c:1">H</span><span class="intro__char" style="--c:2">E</span><span class="intro__space"></span><span class="intro__char" style="--c:3">C</span><span class="intro__char" style="--c:4">O</span><span class="intro__char" style="--c:5">M</span><span class="intro__char" style="--c:6">M</span><span class="intro__char" style="--c:7">O</span><span class="intro__char" style="--c:8">N</span><span class="intro__space"></span><span class="intro__char" style="--c:9">A</span><span class="intro__char" style="--c:10">T</span><span class="intro__char" style="--c:11">H</span><span class="intro__char" style="--c:12">L</span><span class="intro__char" style="--c:13">E</span><span class="intro__char" style="--c:14">T</span><span class="intro__char" style="--c:15">E</span>
+      </h2>
+      <span class="intro__rule" aria-hidden="true"></span>
       <span class="intro__tag">Built for sweat. Designed for every day.</span>
     </div>
+
+    <!-- Skip button for the impatient -->
+    <button class="intro__skip" id="introSkip" type="button">Skip intro</button>
   </div>
 
   <!-- ============ ANNOUNCEMENT BAR ============ -->
