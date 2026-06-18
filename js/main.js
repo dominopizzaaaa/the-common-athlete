@@ -136,8 +136,26 @@
   var drawerBody = document.getElementById("drawerBody");
   var drawerTotal = document.getElementById("drawerTotal");
   var checkoutBtn = document.getElementById("checkoutBtn");
+  var shipMsg = document.getElementById("shipMsg");
+  var shipFill = document.getElementById("shipFill");
+  var FREE_SHIP = 60;
 
   function money(n) { return "S$" + n.toFixed(2); }
+
+  // Update the "X away from free delivery" progress meter.
+  function renderShipping(total) {
+    if (!shipMsg || !shipFill) return;
+    var pct = Math.min(100, (total / FREE_SHIP) * 100);
+    shipFill.style.width = pct + "%";
+    if (total >= FREE_SHIP) {
+      shipMsg.innerHTML = "🎉 You've unlocked <strong>free delivery</strong>!";
+      shipFill.classList.add("is-complete");
+    } else {
+      shipFill.classList.remove("is-complete");
+      shipMsg.innerHTML = "You're <strong>" + money(FREE_SHIP - total) +
+        "</strong> away from free delivery.";
+    }
+  }
 
   function loadBag() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
@@ -170,6 +188,10 @@
     if (bagCount) bagCount.textContent = String(count);
     if (drawerTotal) drawerTotal.textContent = money(total);
     if (checkoutBtn) checkoutBtn.disabled = count === 0;
+
+    var shipWrap = document.getElementById("shipMeter");
+    if (shipWrap) shipWrap.hidden = count === 0;
+    renderShipping(total);
 
     if (!drawerBody) return;
     if (bag.length === 0) {
@@ -292,6 +314,119 @@
       addToBag(scope.dataset.name, price, scope.dataset.img, size);
     });
   }
+
+  /* ---------- Quick-view modal ----------
+     Built from whichever card is opened, so product data stays in one place
+     (the cards). Adds a "Quick view" button to each card image, then mirrors
+     that card's photo, copy, swatches and sizes into a shared modal. */
+  (function quickView() {
+    var qv = document.getElementById("quickView");
+    if (!qv) return;
+    var qvImg = document.getElementById("qvImg");
+    var qvName = document.getElementById("qvName");
+    var qvPrice = document.getElementById("qvPrice");
+    var qvDesc = document.getElementById("qvDesc");
+    var qvSwatches = document.getElementById("qvSwatches");
+    var qvSwatchLabel = document.getElementById("qvSwatchLabel");
+    var qvSizes = document.getElementById("qvSizes");
+    var qvAdd = document.getElementById("qvAdd");
+    var qvClose = document.getElementById("qvClose");
+    var qvOverlay = document.getElementById("qvOverlay");
+    var lastFocus = null;
+
+    function open(card) {
+      lastFocus = document.activeElement;
+      var img = card.querySelector(".ph--card img");
+      qvImg.src = img ? img.getAttribute("src") : "";
+      qvImg.alt = card.dataset.name || "";
+      qvName.textContent = textOf(card, ".card__name") || card.dataset.name || "";
+      qvPrice.textContent = textOf(card, ".card__price");
+      qvDesc.textContent = textOf(card, ".card__desc");
+
+      // Clone swatches (with their data-img) and wire image swap + label.
+      qvSwatches.innerHTML = card.querySelector(".swatches").innerHTML;
+      qvSwatchLabel.textContent = "";
+      qvSwatches.querySelectorAll(".sw").forEach(function (sw) {
+        sw.classList.remove("is-selected");
+        sw.setAttribute("aria-pressed", "false");
+        if (!sw.getAttribute("aria-label")) {
+          sw.setAttribute("aria-label", sw.getAttribute("title") || sw.dataset.color || "Colour");
+        }
+      });
+
+      // Clone sizes fresh (unselected).
+      qvSizes.innerHTML = card.querySelector(".sizes").innerHTML;
+      qvSizes.querySelectorAll(".size").forEach(function (s) { s.classList.remove("is-active"); });
+
+      qv.classList.add("is-open");
+      qv.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      qvClose.focus();
+    }
+    function close() {
+      qv.classList.remove("is-open");
+      qv.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      if (lastFocus) lastFocus.focus();
+    }
+
+    // Add a "Quick view" trigger to every product card image.
+    document.querySelectorAll(".grid--products .card").forEach(function (card) {
+      var media = card.querySelector(".ph--card");
+      if (!media) return;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "qv__trigger";
+      btn.textContent = "Quick view";
+      btn.addEventListener("click", function () { open(card); });
+      media.appendChild(btn);
+    });
+
+    // Modal swatch → swap modal image + label.
+    qvSwatches.addEventListener("click", function (e) {
+      var sw = e.target.closest(".sw");
+      if (!sw) return;
+      qvSwatches.querySelectorAll(".sw").forEach(function (s) {
+        s.classList.remove("is-selected"); s.setAttribute("aria-pressed", "false");
+      });
+      sw.classList.add("is-selected");
+      sw.setAttribute("aria-pressed", "true");
+      var colour = sw.getAttribute("title") || sw.dataset.color;
+      qvSwatchLabel.textContent = "Colour: " + colour;
+      if (sw.dataset.img) {
+        qvImg.src = sw.dataset.img;
+        qvImg.alt = qvName.textContent + " in " + colour;
+      }
+    });
+    qvSwatches.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        var sw = e.target.closest(".sw");
+        if (sw) { e.preventDefault(); sw.click(); }
+      }
+    });
+
+    // Modal size pick (delegated, since sizes are injected).
+    qvSizes.addEventListener("click", function (e) {
+      var pill = e.target.closest(".size");
+      if (!pill) return;
+      qvSizes.classList.remove("needs-pick");
+      qvSizes.querySelectorAll(".size").forEach(function (s) { s.classList.remove("is-active"); });
+      pill.classList.add("is-active");
+    });
+
+    qvAdd.addEventListener("click", function () {
+      var size = selectedSize(qv);
+      if (qvSizes.querySelector(".size") && !size) { requireSize(qvSizes); return; }
+      addToBag(qvName.textContent, parsePrice(qvPrice.textContent), qvImg.getAttribute("src"), size);
+      close();
+    });
+
+    qvClose.addEventListener("click", close);
+    qvOverlay.addEventListener("click", close);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && qv.classList.contains("is-open")) close();
+    });
+  })();
 
   /* ---------- Quantity / remove controls ---------- */
   if (drawerBody) {
@@ -479,12 +614,22 @@
     });
   }
 
-  /* ---------- Scroll reveal ---------- */
+  /* ---------- Scroll reveal (with per-group stagger) ---------- */
   var revealEls = document.querySelectorAll(
     ".section__head, .card, .tile, .feat, .highlight, .about, .waitlist, .promise__item, " +
-    ".community__item, .look, .sizing, .faq__item"
+    ".community__item, .look, .sizing, .faq__item, .shop-choice__card, .contact-card, .post-card"
   );
-  revealEls.forEach(function (el) { el.classList.add("reveal"); });
+  // Stagger siblings that share a parent so grids cascade in nicely. Index is
+  // the element's position among its reveal-siblings, capped so later items
+  // don't lag too far behind.
+  revealEls.forEach(function (el) {
+    el.classList.add("reveal");
+    var parent = el.parentNode;
+    if (!parent) return;
+    var i = parent.__revIdx || 0;
+    el.style.setProperty("--reveal-i", Math.min(i, 6));
+    parent.__revIdx = i + 1;
+  });
 
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -494,7 +639,7 @@
           io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add("is-visible"); });

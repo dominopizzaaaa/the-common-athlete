@@ -453,12 +453,41 @@
     </div>
   </footer>
 
+  <!-- ============ QUICK-VIEW MODAL (populated from the clicked card) ============ -->
+  <div class="qv" id="quickView" aria-hidden="true">
+    <div class="qv__overlay" id="qvOverlay"></div>
+    <div class="qv__dialog" role="dialog" aria-modal="true" aria-labelledby="qvName">
+      <button class="qv__close" id="qvClose" aria-label="Close quick view">&times;</button>
+      <div class="qv__media ph"><img id="qvImg" src="" alt="" /></div>
+      <div class="qv__body">
+        <span class="qv__eyebrow">Quick view</span>
+        <h3 class="qv__name" id="qvName"></h3>
+        <span class="qv__price" id="qvPrice"></span>
+        <p class="qv__desc" id="qvDesc"></p>
+        <div class="qv__colour">
+          <span class="qv__label">Colour</span>
+          <ul class="swatches" id="qvSwatches" aria-label="Select colour"></ul>
+          <p class="swatch-label" id="qvSwatchLabel" aria-live="polite"></p>
+        </div>
+        <div class="qv__sizes">
+          <span class="qv__label">Size</span>
+          <div class="sizes" id="qvSizes" role="group" aria-label="Select size"></div>
+        </div>
+        <button class="btn btn--solid btn--block" id="qvAdd">Add to bag</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ============ BAG DRAWER ============ -->
   <div class="drawer-overlay" id="drawerOverlay" hidden></div>
   <aside class="drawer" id="bagDrawer" aria-label="Shopping bag" aria-hidden="true">
     <div class="drawer__head">
       <h3>Your bag</h3>
       <button class="drawer__close" id="drawerClose" aria-label="Close bag">&times;</button>
+    </div>
+    <div class="ship-meter" id="shipMeter" hidden>
+      <p class="ship-meter__msg" id="shipMsg" role="status" aria-live="polite"></p>
+      <div class="ship-meter__track"><span class="ship-meter__fill" id="shipFill"></span></div>
     </div>
     <div class="drawer__body" id="drawerBody">
       <p class="drawer__empty">Your bag is empty.</p>
