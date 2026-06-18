@@ -1272,8 +1272,123 @@ fieldset.field { border: none; padding: 0; }
   .contact-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* ==========================================================================
+   Intro reveal — first-visit curtain animation (Home)
+   ========================================================================== */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;               /* JS sets display:block to play */
+}
+.intro.is-playing { display: block; }
+body.intro-active { overflow: hidden; }
+
+/* Two espresso panels that split apart like curtains */
+.intro__panel {
+  position: absolute;
+  top: 0;
+  width: 50.5%;                /* slight overlap to avoid a seam */
+  height: 100%;
+  background: var(--accent);
+  will-change: transform;
+}
+.intro__panel--left  { left: 0; }
+.intro__panel--right { right: 0; }
+
+/* Centered logo + wordmark */
+.intro__brand {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  color: var(--bg);
+  will-change: transform, opacity;
+}
+.intro__mark {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(.6);
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,.3));
+}
+.intro__word {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  font-size: clamp(0.95rem, 2.8vw, 1.4rem);
+  padding-left: 0.28em;        /* balance the letter-spacing */
+  opacity: 0;
+  transform: translateY(14px);
+}
+.intro__tag {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: rgba(248,246,241,.65);
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Timeline: mark pops → word rises → tag rises → hold → curtains part → fade */
+.intro.is-playing .intro__mark {
+  animation: introMark 0.7s cubic-bezier(.34,1.56,.64,1) 0.15s forwards;
+}
+.intro.is-playing .intro__word {
+  animation: introUp 0.6s var(--ease) 0.55s forwards;
+}
+.intro.is-playing .intro__tag {
+  animation: introUp 0.6s var(--ease) 0.8s forwards;
+}
+.intro.is-playing .intro__brand {
+  animation: introBrandOut 0.6s var(--ease) 1.9s forwards;
+}
+.intro.is-playing .intro__panel--left {
+  animation: introCurtainL 0.85s cubic-bezier(.76,0,.24,1) 2.05s forwards;
+}
+.intro.is-playing .intro__panel--right {
+  animation: introCurtainR 0.85s cubic-bezier(.76,0,.24,1) 2.05s forwards;
+}
+
+@keyframes introMark {
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes introUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes introBrandOut {
+  to { opacity: 0; transform: scale(1.04); }
+}
+@keyframes introCurtainL { to { transform: translateX(-101%); } }
+@keyframes introCurtainR { to { transform: translateX(101%); } }
+
+/* Hero cascade — hidden only while the intro is pending/playing, so if JS
+   never runs the hero stays fully visible (no stuck-invisible content).
+   intro-pending is set in <head> before paint to avoid a flash. */
+.intro-pending .hero--reveal .hero__rev,
+body.intro-active .hero--reveal .hero__rev {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.hero--reveal.is-revealed .hero__rev {
+  animation: heroRise 0.7s var(--ease) forwards;
+  animation-delay: calc(var(--rev-i, 1) * 0.1s);
+}
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  /* Never hide hero content behind an animation that won't run */
+  .hero--reveal .hero__rev { opacity: 1; transform: none; }
+  .intro { display: none !important; }
 }

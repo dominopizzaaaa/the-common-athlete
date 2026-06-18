@@ -40,6 +40,18 @@
 
   <link rel="stylesheet" href="css/styles.css" />
 
+  <!-- Intro guard: add intro-active before first paint so the hero doesn't
+       flash in before the curtain animation. Mirrors the checks in main.js. -->
+  <script>
+    (function () {
+      try {
+        var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var seen = sessionStorage.getItem("tca_intro_seen") === "1";
+        if (!reduced && !seen) document.documentElement.className += " intro-pending";
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- Structured data for search engines -->
   <script type="application/ld+json">
   {
@@ -78,6 +90,17 @@
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- ============ INTRO REVEAL (first visit, Home only) ============ -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro__panel intro__panel--left"></div>
+    <div class="intro__panel intro__panel--right"></div>
+    <div class="intro__brand">
+      <img src="images/logo.png" alt="" class="intro__mark" width="96" height="96" />
+      <span class="intro__word">THE COMMON ATHLETE</span>
+      <span class="intro__tag">Built for sweat. Designed for every day.</span>
+    </div>
+  </div>
 
   <!-- ============ ANNOUNCEMENT BAR ============ -->
   <div class="announce" id="announce">
@@ -127,20 +150,20 @@
     <span id="main-content"></span>
 
     <!-- ============ HERO ============ -->
-    <section class="hero">
+    <section class="hero hero--reveal">
       <div class="container hero__inner">
         <div class="hero__copy">
-          <span class="eyebrow">For the everyday athlete</span>
-          <h1 class="hero__title">Activewear for the everyday&nbsp;athlete.</h1>
-          <p class="hero__sub">Minimal, functional pieces made for gym days, slow runs, coffee runs, and everything in between.</p>
-          <div class="hero__cta">
+          <span class="eyebrow hero__rev" style="--rev-i:1">For the everyday athlete</span>
+          <h1 class="hero__title hero__rev" style="--rev-i:2">Activewear for the everyday&nbsp;athlete.</h1>
+          <p class="hero__sub hero__rev" style="--rev-i:3">Minimal, functional pieces made for gym days, slow runs, coffee runs, and everything in between.</p>
+          <div class="hero__cta hero__rev" style="--rev-i:4">
             <a href="shop/women.html" class="btn btn--solid">Shop the collection</a>
             <a href="shop/index.html" class="btn btn--outline">Browse shop</a>
           </div>
-          <p class="hero__note">Made in Singapore · Free delivery over S$60 · Easy 14-day returns</p>
+          <p class="hero__note hero__rev" style="--rev-i:5">Made in Singapore · Free delivery over S$60 · Easy 14-day returns</p>
         </div>
 
-        <div class="hero__visual">
+        <div class="hero__visual hero__rev" style="--rev-i:3">
           <!-- Editorial placeholder; swap for a photo later -->
           <div class="ph ph--hero">
             <img src="images/hero.svg" alt="Model wearing The Common Athlete Everyday Set — square-neck longline crop tank and high-waist V-crossover shorts" fetchpriority="high" />

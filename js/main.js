@@ -4,6 +4,44 @@
 (function () {
   "use strict";
 
+  /* ---------- Intro reveal (first visit, Home only) ----------
+     Plays a one-time curtain-split intro, then cascades the hero in. Skips
+     when: there's no #intro on the page, the user prefers reduced motion, or
+     it has already played this browser session. The hero is always revealed
+     either way, so content never gets stuck hidden. */
+  (function intro() {
+    var intro = document.getElementById("intro");
+    var hero = document.querySelector(".hero--reveal");
+    var revealHero = function () {
+      document.documentElement.classList.remove("intro-pending");
+      if (hero) hero.classList.add("is-revealed");
+    };
+
+    var reduced = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var seen;
+    try { seen = sessionStorage.getItem("tca_intro_seen") === "1"; } catch (e) { seen = false; }
+
+    if (!intro || reduced || seen) {
+      if (intro) intro.parentNode.removeChild(intro);
+      revealHero();
+      return;
+    }
+
+    try { sessionStorage.setItem("tca_intro_seen", "1"); } catch (e) {}
+
+    document.body.classList.add("intro-active");
+    intro.classList.add("is-playing");
+
+    // Total timeline ≈ 2.9s (curtains start at 2.05s + 0.85s). Reveal the hero
+    // just as the curtains open, then clean up once they've cleared.
+    setTimeout(revealHero, 2150);
+    setTimeout(function () {
+      document.body.classList.remove("intro-active");
+      if (intro.parentNode) intro.parentNode.removeChild(intro);
+    }, 3050);
+  })();
+
   /* ---------- Current year in footer ---------- */
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
