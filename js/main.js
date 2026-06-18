@@ -42,12 +42,12 @@
     intro.classList.add("is-playing");
 
     // Reveal the site as the slats begin sweeping away, then remove the overlay.
-    var heroT = setTimeout(revealHero, 2750);
+    var heroT = setTimeout(revealHero, 1450);
     var cleanupT = setTimeout(function () {
       finished = true;
       body.classList.remove("intro-active");
       if (intro.parentNode) intro.parentNode.removeChild(intro);
-    }, 4100);
+    }, 2450);
     timers.push(heroT, cleanupT);
 
     // Skip: fast-forward straight to the revealed site.
