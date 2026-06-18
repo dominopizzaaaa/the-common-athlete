@@ -71,51 +71,6 @@
         "name": "The Common Athlete",
         "publisher": { "@id": "https://dominopizzaaaa.github.io/the-common-athlete/#org" },
         "inLanguage": "en-SG"
-      },
-      {
-        "@type": "ItemList",
-        "name": "The First Drop",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "item": {
-            "@type": "Product", "name": "Square-Neck Longline Crop Tank",
-            "description": "Square-neck longline crop with low-to-medium support, built-in shelf, and removable cups.",
-            "image": "https://dominopizzaaaa.github.io/the-common-athlete/images/products/longline-crop-tank-espresso.png",
-            "brand": { "@id": "https://dominopizzaaaa.github.io/the-common-athlete/#org" },
-            "offers": { "@type": "Offer", "price": "34.90", "priceCurrency": "SGD", "availability": "https://schema.org/InStock" }
-          }},
-          { "@type": "ListItem", "position": 2, "item": {
-            "@type": "Product", "name": "Strappy Crossback Bralette",
-            "description": "Light-support bralette with delicate straps and a strappy crossback.",
-            "image": "https://dominopizzaaaa.github.io/the-common-athlete/images/products/crossback-bralette-espresso.png",
-            "brand": { "@id": "https://dominopizzaaaa.github.io/the-common-athlete/#org" },
-            "offers": { "@type": "Offer", "price": "32.90", "priceCurrency": "SGD", "availability": "https://schema.org/InStock" }
-          }},
-          { "@type": "ListItem", "position": 3, "item": {
-            "@type": "Product", "name": "High-Waist V-Crossover Shorts",
-            "description": "High-waisted, squat-proof fitted shorts with a V-crossover waistband and side pockets.",
-            "image": "https://dominopizzaaaa.github.io/the-common-athlete/images/products/vcrossover-shorts-espresso.png",
-            "brand": { "@id": "https://dominopizzaaaa.github.io/the-common-athlete/#org" },
-            "offers": { "@type": "Offer", "price": "36.90", "priceCurrency": "SGD", "availability": "https://schema.org/InStock" }
-          }},
-          { "@type": "ListItem", "position": 4, "item": {
-            "@type": "Product", "name": "2-in-1 Flowy Running Shorts",
-            "description": "Flowy outer over a fitted liner, with a side phone pocket and a zip back pocket.",
-            "image": "https://dominopizzaaaa.github.io/the-common-athlete/images/products/running-shorts-espresso.png",
-            "brand": { "@id": "https://dominopizzaaaa.github.io/the-common-athlete/#org" },
-            "offers": { "@type": "Offer", "price": "38.90", "priceCurrency": "SGD", "availability": "https://schema.org/InStock" }
-          }}
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          { "@type": "Question", "name": "How do I place an order?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Add items to your bag and checkout. We'll confirm your order and send payment details via WhatsApp or email within 24 hours." } },
-          { "@type": "Question", "name": "Is the activewear made for Singapore weather?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes — every piece is designed to be breathable, sweat-friendly, and quick to move in, indoors or out in the heat." } },
-          { "@type": "Question", "name": "Do the bras have removable padding?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The Square-Neck Longline Crop Tank comes with removable cups and offers low-to-medium support." } }
-        ]
       }
     ]
   }
@@ -126,7 +81,7 @@
 
   <!-- ============ ANNOUNCEMENT BAR ============ -->
   <div class="announce" id="announce">
-    <p>Free delivery on orders over S$60 — <a href="#collection" style="text-decoration:underline;color:inherit;">shop now</a>.</p>
+    <p>Free delivery on orders over S$60 — <a href="shop/women.html" style="text-decoration:underline;color:inherit;">shop now</a>.</p>
     <button class="announce__close" id="announceClose" aria-label="Close announcement">&times;</button>
   </div>
 
@@ -137,18 +92,17 @@
         <span></span><span></span><span></span>
       </button>
 
-      <a href="#top" class="nav__logo">
+      <a href="index.html" class="nav__logo">
         <img src="images/logo.png" alt="" class="nav__logo-mark" width="32" height="32" />
         <span>THE COMMON ATHLETE</span>
       </a>
 
       <nav class="nav__links" aria-label="Primary">
-        <a href="#collection">Shop</a>
-        <a href="#lookbook">Lookbook</a>
-        <a href="#about">About</a>
-        <a href="#size-guide">Size Guide</a>
+        <a href="index.html" class="is-active">Home</a>
+        <a href="shop/index.html">Shop</a>
+        <a href="about.html">About</a>
         <a href="blog/index.html">Journal</a>
-        <a href="#contact">Contact</a>
+        <a href="contact.html">Contact</a>
       </nav>
 
       <button class="nav__bag" id="bagBtn" aria-label="Open bag">
@@ -159,14 +113,12 @@
     <!-- Mobile menu -->
     <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
       <nav aria-label="Mobile">
-        <a href="#collection" class="mobile-menu__link">Shop</a>
-        <a href="#lookbook" class="mobile-menu__link">Lookbook</a>
-        <a href="#about" class="mobile-menu__link">About</a>
-        <a href="#size-guide" class="mobile-menu__link">Size Guide</a>
-        <a href="#faq" class="mobile-menu__link">FAQ</a>
+        <a href="index.html" class="mobile-menu__link">Home</a>
+        <a href="shop/index.html" class="mobile-menu__link">Shop</a>
+        <a href="about.html" class="mobile-menu__link">About</a>
         <a href="blog/index.html" class="mobile-menu__link">Journal</a>
-        <a href="#contact" class="mobile-menu__link">Contact</a>
-        <a href="#collection" class="mobile-menu__link mobile-menu__cta">Shop now</a>
+        <a href="contact.html" class="mobile-menu__link">Contact</a>
+        <a href="shop/women.html" class="mobile-menu__link mobile-menu__cta">Shop now</a>
       </nav>
     </div>
   </header>
@@ -182,8 +134,8 @@
           <h1 class="hero__title">Activewear for the everyday&nbsp;athlete.</h1>
           <p class="hero__sub">Minimal, functional pieces made for gym days, slow runs, coffee runs, and everything in between.</p>
           <div class="hero__cta">
-            <a href="#collection" class="btn btn--solid">Shop the collection</a>
-            <a href="#set" class="btn btn--outline">The Everyday Set</a>
+            <a href="shop/women.html" class="btn btn--solid">Shop the collection</a>
+            <a href="shop/index.html" class="btn btn--outline">Browse shop</a>
           </div>
           <p class="hero__note">Made in Singapore · Free delivery over S$60 · Easy 14-day returns</p>
         </div>
@@ -204,179 +156,6 @@
         <div class="promise__item"><span class="promise__k">02</span><p>Free delivery over S$60</p></div>
         <div class="promise__item"><span class="promise__k">03</span><p>14-day easy returns</p></div>
         <div class="promise__item"><span class="promise__k">04</span><p>No luxury markup</p></div>
-      </div>
-    </section>
-
-    <!-- ============ FEATURED COLLECTION ============ -->
-    <section class="section" id="collection">
-      <div class="container">
-        <header class="section__head">
-          <span class="eyebrow">The Collection</span>
-          <h2 class="section__title">Clean, everyday staples made to move with you.</h2>
-        </header>
-
-        <div class="grid grid--products" id="productGrid">
-          <!-- Product 1 -->
-          <article class="card" data-name="Square-Neck Longline Crop Tank" data-img="images/products/longline-crop-tank-espresso.png">
-            <div class="ph ph--card">
-              <img src="images/products/longline-crop-tank-espresso.png" alt="Square-Neck Longline Crop Tank in espresso brown — front and back" loading="lazy" />
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__name">Square-Neck Longline Crop Tank</h3>
-                <span class="card__price">S$34.90</span>
-              </div>
-              <p class="card__desc">A square-neck longline crop with low-to-medium support. Built-in shelf, removable cups, and a wide band that wears as easily as a top.</p>
-              <ul class="swatches" aria-label="Select colour">
-                <li class="sw sw--black" title="Black" data-color="black" data-img="images/products/longline-crop-tank-black.png" role="button" tabindex="0" aria-pressed="false"></li>
-                <li class="sw sw--espresso" title="Espresso" data-color="espresso" data-img="images/products/longline-crop-tank-espresso.png" role="button" tabindex="0" aria-pressed="false"></li>
-                <li class="sw sw--sand" title="Sand Beige" data-color="sand" data-img="images/products/longline-crop-tank-sand.png" role="button" tabindex="0" aria-pressed="false"></li>
-              </ul>
-              <p class="swatch-label" aria-live="polite"></p>
-              <div class="sizes" role="group" aria-label="Select size">
-                <button type="button" class="size">XS</button>
-                <button type="button" class="size">S</button>
-                <button type="button" class="size">M</button>
-                <button type="button" class="size">L</button>
-                <button type="button" class="size">XL</button>
-              </div>
-              <button class="btn btn--solid btn--block add-to-bag">Add to bag</button>
-            </div>
-          </article>
-
-          <!-- Product 2 -->
-          <article class="card" data-name="Strappy Crossback Bralette" data-img="images/products/crossback-bralette-espresso.png">
-            <div class="ph ph--card">
-              <img src="images/products/crossback-bralette-espresso.png" alt="Strappy Crossback Bralette in espresso brown — front and crossback back view" loading="lazy" />
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__name">Strappy Crossback Bralette</h3>
-                <span class="card__price">S$32.90</span>
-              </div>
-              <p class="card__desc">A light-support bralette with delicate straps and a strappy crossback. Soft enough for Pilates and rest days, pretty enough to layer under anything.</p>
-              <ul class="swatches" aria-label="Select colour">
-                <li class="sw sw--black" title="Black" data-color="black" data-img="images/products/crossback-bralette-black.png" role="button" tabindex="0" aria-pressed="false"></li>
-                <li class="sw sw--espresso" title="Espresso" data-color="espresso" data-img="images/products/crossback-bralette-espresso.png" role="button" tabindex="0" aria-pressed="false"></li>
-                <li class="sw sw--sand" title="Sand Beige" data-color="sand" data-img="images/products/crossback-bralette-sand.png" role="button" tabindex="0" aria-pressed="false"></li>
-              </ul>
-              <p class="swatch-label" aria-live="polite"></p>
-              <div class="sizes" role="group" aria-label="Select size">
-                <button type="button" class="size">XS</button>
-                <button type="button" class="size">S</button>
-                <button type="button" class="size">M</button>
-                <button type="button" class="size">L</button>
-                <button type="button" class="size">XL</button>
-              </div>
-              <button class="btn btn--solid btn--block add-to-bag">Add to bag</button>
-            </div>
-          </article>
-
-          <!-- Product 3 -->
-          <article class="card" data-name="High-Waist V-Crossover Shorts" data-img="images/products/vcrossover-shorts-espresso.png">
-            <div class="ph ph--card">
-              <img src="images/products/vcrossover-shorts-espresso.png" alt="High-Waist V-Crossover Shorts in espresso brown — front and back with side pockets" loading="lazy" />
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__name">High-Waist V-Crossover Shorts</h3>
-                <span class="card__price">S$36.90</span>
-              </div>
-              <p class="card__desc">High-waisted, squat-proof fitted shorts with a flattering V-crossover waistband and sleek side pockets for your phone and keys.</p>
-              <ul class="swatches" aria-label="Select colour">
-                <li class="sw sw--black" title="Black" data-color="black" data-img="images/products/vcrossover-shorts-black.png" role="button" tabindex="0" aria-pressed="false"></li>
-                <li class="sw sw--espresso" title="Espresso" data-color="espresso" data-img="images/products/vcrossover-shorts-espresso.png" role="button" tabindex="0" aria-pressed="false"></li>
-                <li class="sw sw--sand" title="Sand Beige" data-color="sand" data-img="images/products/vcrossover-shorts-sand.png" role="button" tabindex="0" aria-pressed="false"></li>
-              </ul>
-              <p class="swatch-label" aria-live="polite"></p>
-              <div class="sizes" role="group" aria-label="Select size">
-                <button type="button" class="size">XS</button>
-                <button type="button" class="size">S</button>
-                <button type="button" class="size">M</button>
-                <button type="button" class="size">L</button>
-                <button type="button" class="size">XL</button>
-              </div>
-              <button class="btn btn--solid btn--block add-to-bag">Add to bag</button>
-            </div>
-          </article>
-
-          <!-- Product 4 -->
-          <article class="card" data-name="2-in-1 Flowy Running Shorts" data-img="images/products/running-shorts-espresso.png">
-            <div class="ph ph--card">
-              <img src="images/products/running-shorts-espresso.png" alt="2-in-1 Flowy Running Shorts in espresso brown — flowy outer with fitted liner, front and back" loading="lazy" />
-            </div>
-            <div class="card__body">
-              <div class="card__top">
-                <h3 class="card__name">2-in-1 Flowy Running Shorts</h3>
-                <span class="card__price">S$38.90</span>
-              </div>
-              <p class="card__desc">Flowy outer layer over a fitted liner — no chafe, full coverage. Side phone pocket and a zip back pocket for easy miles.</p>
-              <ul class="swatches" aria-label="Select colour">
-                <li class="sw sw--black" title="Black" data-color="black" data-img="images/products/running-shorts-black.png" role="button" tabindex="0" aria-pressed="false"></li>
-                <li class="sw sw--espresso" title="Espresso" data-color="espresso" data-img="images/products/running-shorts-espresso.png" role="button" tabindex="0" aria-pressed="false"></li>
-                <li class="sw sw--sand" title="Sand Beige" data-color="sand" data-img="images/products/running-shorts-sand.png" role="button" tabindex="0" aria-pressed="false"></li>
-              </ul>
-              <p class="swatch-label" aria-live="polite"></p>
-              <div class="sizes" role="group" aria-label="Select size">
-                <button type="button" class="size">XS</button>
-                <button type="button" class="size">S</button>
-                <button type="button" class="size">M</button>
-                <button type="button" class="size">L</button>
-                <button type="button" class="size">XL</button>
-              </div>
-              <button class="btn btn--solid btn--block add-to-bag">Add to bag</button>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CAMPAIGN BANNER ============ -->
-    <section class="banner" aria-label="Campaign">
-      <img src="images/banner.svg" alt="Built for sweat. Designed for every day." loading="lazy" />
-    </section>
-
-    <!-- ============ COLLECTION HIGHLIGHT — THE EVERYDAY SET ============ -->
-    <section class="section section--alt" id="set">
-      <div class="container highlight">
-        <div class="highlight__visual">
-          <div class="ph ph--tall ph--card">
-            <img src="images/products/longline-crop-tank-espresso.png" alt="The Everyday Set — Square-Neck Longline Crop Tank and High-Waist V-Crossover Shorts in espresso" loading="lazy" />
-          </div>
-        </div>
-        <div class="highlight__copy">
-          <span class="eyebrow">Build your set</span>
-          <h2 class="section__title">The Everyday Set</h2>
-          <p class="lead">The Square-Neck Longline Crop Tank and High-Waist V-Crossover Shorts together — made for movement, errands, and everything after.</p>
-          <ul class="feature-list">
-            <li>Removable cups</li>
-            <li>Low-to-medium support</li>
-            <li>High-waisted fit</li>
-            <li>Side pockets</li>
-            <li>Soft compression</li>
-            <li>Minimal branding</li>
-          </ul>
-
-          <div class="set-price">
-            <span class="set-price__now">S$64.90</span>
-            <span class="set-price__was">S$71.80</span>
-            <span class="set-price__save">Save S$6.90</span>
-          </div>
-
-          <div class="set-buy" data-name="The Everyday Set" data-price="64.90" data-img="images/products/longline-crop-tank-espresso.png">
-            <div class="sizes" role="group" aria-label="Select size">
-              <button type="button" class="size">XS</button>
-              <button type="button" class="size">S</button>
-              <button type="button" class="size">M</button>
-              <button type="button" class="size">L</button>
-              <button type="button" class="size">XL</button>
-            </div>
-            <div class="set-buy__actions">
-              <button class="btn btn--solid add-set">Add set to bag</button>
-              <a href="#collection" class="btn btn--outline">Shop pieces</a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -426,131 +205,16 @@
             <figcaption>The set, head to toe.</figcaption>
           </figure>
           <figure class="look">
-            <div class="ph ph--look"><img src="images/look-2.svg" alt="The oversized cover tee layered over the set" loading="lazy" /></div>
-            <figcaption>Cover tee, layered over.</figcaption>
+            <div class="ph ph--look"><img src="images/look-2.svg" alt="The crop tank layered for everyday" loading="lazy" /></div>
+            <figcaption>Layered for everyday.</figcaption>
           </figure>
           <figure class="look">
             <div class="ph ph--look"><img src="images/look-3.svg" alt="The set styled off-duty" loading="lazy" /></div>
             <figcaption>Off-duty and easy.</figcaption>
           </figure>
         </div>
-      </div>
-    </section>
-
-    <!-- ============ ABOUT ============ -->
-    <section class="section section--alt" id="about">
-      <div class="container about">
-        <div class="about__copy">
-          <span class="eyebrow">About</span>
-          <h2 class="section__title">Common, not ordinary.</h2>
-          <p class="lead">The Common Athlete was created for people who show up in small, consistent ways. You don't need to be elite to dress like movement is part of your life.</p>
-          <p>Our pieces are minimal, functional, and priced without the luxury markup — made for everyday athletes in real life.</p>
-        </div>
-        <div class="about__visual">
-          <div class="ph ph--tall">
-            <img src="images/about.svg" alt="Everyday athletes in The Common Athlete" loading="lazy" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ FIT & FUNCTION ============ -->
-    <section class="section" id="fit">
-      <div class="container">
-        <header class="section__head">
-          <span class="eyebrow">Fit &amp; Function</span>
-          <h2 class="section__title">Designed around how you actually move.</h2>
-        </header>
-
-        <div class="grid grid--features">
-          <div class="feat"><span class="feat__k">+</span>Removable padding</div>
-          <div class="feat"><span class="feat__k">+</span>Soft compression</div>
-          <div class="feat"><span class="feat__k">+</span>No-fuss basics</div>
-          <div class="feat"><span class="feat__k">+</span>Sweat-friendly fabric</div>
-          <div class="feat"><span class="feat__k">+</span>Sleek pockets</div>
-          <div class="feat"><span class="feat__k">+</span>Neutral colours</div>
-          <div class="feat"><span class="feat__k">+</span>Easy to mix and match</div>
-          <div class="feat"><span class="feat__k">+</span>Designed for warm weather</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SIZE GUIDE ============ -->
-    <section class="section section--alt" id="size-guide">
-      <div class="container">
-        <header class="section__head">
-          <span class="eyebrow">Size Guide</span>
-          <h2 class="section__title">Find your everyday fit.</h2>
-          <p class="lead">Our pieces run true to size with a soft, supportive stretch. Between sizes? Size down for compression, up for a relaxed feel.</p>
-        </header>
-
-        <div class="sizing">
-          <div class="sizing__chart">
-            <div class="table-wrap">
-              <table class="size-table">
-                <caption>Women's measurements (cm)</caption>
-                <thead>
-                  <tr><th>Size</th><th>UK</th><th>Bust</th><th>Waist</th><th>Hip</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>XS</td><td>6</td><td>76–80</td><td>58–62</td><td>84–88</td></tr>
-                  <tr><td>S</td><td>8</td><td>81–85</td><td>63–67</td><td>89–93</td></tr>
-                  <tr><td>M</td><td>10</td><td>86–90</td><td>68–72</td><td>94–98</td></tr>
-                  <tr><td>L</td><td>12</td><td>91–96</td><td>73–78</td><td>99–104</td></tr>
-                  <tr><td>XL</td><td>14</td><td>97–102</td><td>79–84</td><td>105–110</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p class="sizing__note muted">Not sure of your size? Message us on WhatsApp and we'll help you find your fit.</p>
-
-            <ul class="sizing__tips">
-              <li><strong>Longline Crop Tank</strong> — low-to-medium support, true to size.</li>
-              <li><strong>Crossback Bralette</strong> — light support; true to size for a soft, close fit.</li>
-              <li><strong>V-Crossover Shorts</strong> — high-waisted with soft compression; size down for a firmer hold.</li>
-              <li><strong>Running Shorts</strong> — flowy outer with a fitted liner; take your usual size.</li>
-            </ul>
-          </div>
-
-          <div class="sizing__measure">
-            <div class="ph ph--measure"><img src="images/measure.svg" alt="How to measure your bust, waist, and hip" loading="lazy" /></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ FAQ ============ -->
-    <section class="section" id="faq">
-      <div class="container">
-        <header class="section__head">
-          <span class="eyebrow">FAQ</span>
-          <h2 class="section__title">Good to know.</h2>
-        </header>
-
-        <div class="faq">
-          <details class="faq__item">
-            <summary aria-expanded="false">How do I place an order?</summary>
-            <p>Add your items to your bag, select your size and colour, then checkout. We'll confirm your order and send payment details via WhatsApp or email within 24 hours.</p>
-          </details>
-          <details class="faq__item">
-            <summary aria-expanded="false">Is the activewear made for Singapore weather?</summary>
-            <p>Yes — every piece is designed to be breathable, sweat-friendly, and quick to move in, whether you're training indoors or out in the heat.</p>
-          </details>
-          <details class="faq__item">
-            <summary aria-expanded="false">Do the bras have removable padding?</summary>
-            <p>The Square-Neck Longline Crop Tank comes with removable cups and offers low-to-medium support, so you can wear it your way — with or without.</p>
-          </details>
-          <details class="faq__item">
-            <summary aria-expanded="false">How does delivery work?</summary>
-            <p>We deliver across Singapore. Free delivery on orders over S$60 — standard delivery is S$4.50. Orders are processed within 1–2 business days.</p>
-          </details>
-          <details class="faq__item">
-            <summary aria-expanded="false">What's your return policy?</summary>
-            <p>Unworn items with tags intact can be returned within 14 days of delivery for an exchange or refund. See our <a href="shipping-returns.html">Shipping &amp; Returns</a> page for full details.</p>
-          </details>
-          <details class="faq__item">
-            <summary aria-expanded="false">How do I get help choosing a size?</summary>
-            <p>Message us on WhatsApp at <a href="https://wa.me/6597799779" target="_blank" rel="noopener">+65 9779 9779</a> — we're happy to help you find your everyday fit.</p>
-          </details>
+        <div style="text-align:center;margin-top:48px;">
+          <a href="shop/women.html" class="btn btn--solid">Shop the collection</a>
         </div>
       </div>
     </section>
@@ -624,10 +288,10 @@
   </main>
 
   <!-- ============ FOOTER ============ -->
-  <footer class="footer" id="contact">
+  <footer class="footer">
     <div class="container footer__grid">
       <div class="footer__brand">
-        <a href="#top" class="footer__logo">
+        <a href="index.html" class="footer__logo">
           <img src="images/logo.png" alt="" class="footer__logo-mark" width="40" height="40" />
           <span>THE COMMON ATHLETE</span>
         </a>
@@ -636,17 +300,17 @@
 
       <nav class="footer__col" aria-label="Footer shop">
         <h4>Shop</h4>
-        <a href="#collection">The Collection</a>
-        <a href="#set">The Everyday Set</a>
-        <a href="#lookbook">Lookbook</a>
-        <a href="#size-guide">Size Guide</a>
+        <a href="shop/women.html">Women</a>
+        <a href="shop/men.html">Men</a>
+        <a href="shop/women.html#set">The Everyday Set</a>
+        <a href="shop/women.html#size-guide">Size Guide</a>
         <a href="shipping-returns.html">Shipping &amp; Returns</a>
       </nav>
 
       <nav class="footer__col" aria-label="Footer brand">
         <h4>Brand</h4>
         <a href="about.html">About</a>
-        <a href="#faq">FAQ</a>
+        <a href="contact.html">Contact</a>
         <a href="blog/index.html">Journal</a>
         <a href="https://wa.me/6597799779" target="_blank" rel="noopener">WhatsApp</a>
         <a href="https://www.instagram.com/thecommonathlete.sg" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
