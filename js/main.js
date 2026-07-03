@@ -772,7 +772,8 @@
   /* ---------- Scroll reveal (with per-group stagger) ---------- */
   var revealEls = document.querySelectorAll(
     ".section__head, .card, .tile, .feat, .highlight, .about, .waitlist, .promise__item, " +
-    ".community__item, .look, .sizing, .faq__item, .shop-choice__card, .contact-card, .post-card"
+    ".community__item, .look, .sizing, .faq__item, .shop-choice__card, .contact-card, .post-card, " +
+    ".tease, .editorial__inner"
   );
   // Stagger siblings that share a parent so grids cascade in nicely. Index is
   // the element's position among its reveal-siblings, capped so later items

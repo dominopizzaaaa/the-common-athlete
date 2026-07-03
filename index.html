@@ -33,10 +33,10 @@
   <!-- Fonts: Space Grotesk for headings, Inter for body (includes 300 weight for lighter subtitles) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Preload above-fold hero image -->
-  <link rel="preload" as="image" href="images/hero.svg" />
+  <link rel="preload" as="image" href="images/products/longline-crop-tank-espresso.png" />
 
   <link rel="stylesheet" href="css/styles.css" />
 
@@ -183,24 +183,47 @@
     <section class="hero hero--reveal">
       <div class="container hero__inner">
         <div class="hero__copy">
-          <span class="eyebrow hero__rev" style="--rev-i:1">For the everyday athlete</span>
-          <h1 class="hero__title hero__rev" style="--rev-i:2">Activewear for the everyday&nbsp;athlete.</h1>
+          <span class="eyebrow hero__rev" style="--rev-i:1">Singapore · Women-first activewear</span>
+          <h1 class="hero__title hero__rev" style="--rev-i:2">Move like it's an <em>everyday</em> thing.</h1>
           <p class="hero__sub hero__rev" style="--rev-i:3">Minimal, functional pieces made for gym days, slow runs, coffee runs, and everything in between.</p>
           <div class="hero__cta hero__rev" style="--rev-i:4">
             <a href="shop/women.html" class="btn btn--solid">Shop the collection</a>
-            <a href="shop/index.html" class="btn btn--outline">Browse shop</a>
+            <a href="about.html" class="btn btn--outline">Our story</a>
           </div>
           <p class="hero__note hero__rev" style="--rev-i:5">Made in Singapore · Free delivery over S$60 · Easy 14-day returns</p>
         </div>
 
         <div class="hero__visual hero__rev" style="--rev-i:3">
-          <!-- Editorial placeholder; swap for a photo later -->
-          <div class="ph ph--hero">
-            <img src="images/hero.svg" alt="Model wearing The Common Athlete Everyday Set — square-neck longline crop tank and high-waist V-crossover shorts" fetchpriority="high" />
+          <div class="ph ph--hero ph--arch">
+            <img src="images/products/longline-crop-tank-espresso.png" alt="Square-Neck Longline Crop Tank in espresso — front and back" fetchpriority="high" />
+          </div>
+          <div class="spin-badge" aria-hidden="true">
+            <span class="spin-badge__disc"></span>
+            <svg class="spin-badge__text" viewBox="0 0 128 128">
+              <defs>
+                <path id="badge-circle" d="M 64,64 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0" />
+              </defs>
+              <text><textPath href="#badge-circle">The Common Athlete · Singapore ·&#160;</textPath></text>
+            </svg>
+            <img src="images/logo.png" alt="" class="spin-badge__logo" width="54" height="54" />
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Built for sweat</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item marquee__item--serif">designed for every day</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item">Made in Singapore</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item marquee__item--serif">no luxury markup</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item">Built for sweat</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item marquee__item--serif">designed for every day</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item">Made in Singapore</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item marquee__item--serif">no luxury markup</span><span class="marquee__dot">✦</span>
+      </div>
+    </div>
 
     <!-- ============ BRAND PROMISE STRIP ============ -->
     <section class="promise" aria-label="Brand promises">
@@ -209,6 +232,69 @@
         <div class="promise__item"><span class="promise__k">02</span><p>Free delivery over S$60</p></div>
         <div class="promise__item"><span class="promise__k">03</span><p>14-day easy returns</p></div>
         <div class="promise__item"><span class="promise__k">04</span><p>No luxury markup</p></div>
+      </div>
+    </section>
+
+    <!-- ============ BESTSELLERS TEASE ============ -->
+    <section class="section" id="bestsellers">
+      <div class="container">
+        <header class="section__head section__head--row">
+          <div>
+            <span class="eyebrow">The Collection</span>
+            <h2 class="section__title">Four staples. <em>Zero fuss.</em></h2>
+          </div>
+          <a href="shop/women.html" class="btn btn--outline">Shop all</a>
+        </header>
+
+        <div class="grid grid--tease">
+          <a class="tease" href="shop/women.html">
+            <div class="tease__media">
+              <img src="images/products/longline-crop-tank-espresso.png" alt="Square-Neck Longline Crop Tank in espresso" loading="lazy" />
+              <img src="images/products/longline-crop-tank-sand.png" alt="" class="tease__alt" loading="lazy" aria-hidden="true" />
+            </div>
+            <div class="tease__row"><h3>Square-Neck Longline Crop Tank</h3><span>S$34.90</span></div>
+            <p class="tease__cta">Shop now</p>
+          </a>
+
+          <a class="tease" href="shop/women.html">
+            <div class="tease__media">
+              <img src="images/products/crossback-bralette-espresso.png" alt="Strappy Crossback Bralette in espresso" loading="lazy" />
+              <img src="images/products/crossback-bralette-sand.png" alt="" class="tease__alt" loading="lazy" aria-hidden="true" />
+            </div>
+            <div class="tease__row"><h3>Strappy Crossback Bralette</h3><span>S$32.90</span></div>
+            <p class="tease__cta">Shop now</p>
+          </a>
+
+          <a class="tease" href="shop/women.html">
+            <div class="tease__media">
+              <img src="images/products/vcrossover-shorts-espresso.png" alt="High-Waist V-Crossover Shorts in espresso" loading="lazy" />
+              <img src="images/products/vcrossover-shorts-sand.png" alt="" class="tease__alt" loading="lazy" aria-hidden="true" />
+            </div>
+            <div class="tease__row"><h3>High-Waist V-Crossover Shorts</h3><span>S$36.90</span></div>
+            <p class="tease__cta">Shop now</p>
+          </a>
+
+          <a class="tease" href="shop/women.html">
+            <div class="tease__media">
+              <img src="images/products/running-shorts-espresso.png" alt="2-in-1 Flowy Running Shorts in espresso" loading="lazy" />
+              <img src="images/products/running-shorts-sand.png" alt="" class="tease__alt" loading="lazy" aria-hidden="true" />
+            </div>
+            <div class="tease__row"><h3>2-in-1 Flowy Running Shorts</h3><span>S$38.90</span></div>
+            <p class="tease__cta">Shop now</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EDITORIAL BAND ============ -->
+    <section class="editorial" aria-label="Our philosophy">
+      <div class="container">
+        <div class="editorial__inner">
+          <span class="eyebrow eyebrow--light">Our philosophy</span>
+          <h2 class="editorial__statement">Common, <em>not ordinary.</em></h2>
+          <p>You don't need to be elite to dress like movement is part of your life. We make minimal, breathable pieces for the athletes who show up in small, consistent ways — priced honestly, made for Singapore.</p>
+          <a href="about.html" class="btn btn--light">Read our story</a>
+        </div>
       </div>
     </section>
 
@@ -241,33 +327,6 @@
             <h3 class="tile__name">Everyday</h3>
             <p>Throw-on pieces for coffee runs and rest days.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ LOOKBOOK ============ -->
-    <section class="section" id="lookbook">
-      <div class="container">
-        <header class="section__head">
-          <span class="eyebrow">Lookbook</span>
-          <h2 class="section__title">One capsule, styled for real life.</h2>
-        </header>
-        <div class="grid grid--look">
-          <figure class="look">
-            <div class="ph ph--look"><img src="images/look-1.svg" alt="The set worn for training" loading="lazy" /></div>
-            <figcaption>The set, head to toe.</figcaption>
-          </figure>
-          <figure class="look">
-            <div class="ph ph--look"><img src="images/look-2.svg" alt="The crop tank layered for everyday" loading="lazy" /></div>
-            <figcaption>Layered for everyday.</figcaption>
-          </figure>
-          <figure class="look">
-            <div class="ph ph--look"><img src="images/look-3.svg" alt="The set styled off-duty" loading="lazy" /></div>
-            <figcaption>Off-duty and easy.</figcaption>
-          </figure>
-        </div>
-        <div style="text-align:center;margin-top:48px;">
-          <a href="shop/women.html" class="btn btn--solid">Shop the collection</a>
         </div>
       </div>
     </section>
@@ -385,6 +444,7 @@
       </div>
     </div>
 
+    <span class="footer__mega" aria-hidden="true">THE COMMON ATHLETE</span>
     <div class="container footer__base">
       <p>© <span id="year"></span> The Common Athlete. All rights reserved.</p>
       <nav class="footer__legal" aria-label="Legal">
